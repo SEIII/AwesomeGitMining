@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Tell the browser to be responsive to screen width -->
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <!-- Bootstrap 3.3.5 -->
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+        <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+              page. However, you can choose any other skin. Make sure you
+              apply the skin class to the body tag so the changes take effect.
+        -->
+        <link rel="stylesheet" href="dist/css/skins/skin-blue.css">
+
+
+        <!-- iCheck -->
+        <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
+        <!-- Date Picker -->
+        <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+        <!-- Daterange picker -->
+        <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+        <!-- bootstrap wysihtml5 - text editor -->
+        <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+
+
+
+        <title>My-AweSome-GitMiNing</title>
+        <!-- jQuery 2.1.4 -->
+        <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+        <!-- Bootstrap 3.3.5 -->
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+
+
+        <script src="echarts.min.js"></script>
+
+
+
+        <!-- jQuery UI 1.11.4 -->
+        <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+        <script>
+            $.widget.bridge('uibutton', $.ui.button);
+        </script>
+
+        <!-- jQuery Knob Chart -->
+        <script src="plugins/knob/jquery.knob.js"></script>
+        <!-- daterangepicker -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+        <script src="plugins/daterangepicker/daterangepicker.js"></script>
+        <!-- datepicker -->
+        <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+        <!-- Bootstrap WYSIHTML5 -->
+        <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+
+        <!-- DataTables -->
+        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <!-- SlimScroll -->
+        <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+        <!-- FastClick -->
+        <script src="plugins/fastclick/fastclick.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="dist/js/app.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="dist/js/demo.js"></script>
+        <!-- page script -->
+
+
+        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+        <script src="dist/js/pages/dashboard.js"></script>
+
+
+        <link rel="stylesheet" href="custom/my-content-header.css">
+        <link rel="stylesheet" href="custom/my-column.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        
+        
+        <script>
+			var userRow = ${userInfoJsonList};
+			var currentkey = "${key}";
+			var currentpage = 0;
+			var totalpagenum = ${totalPageNum};
+			var urlstr;
+			
+			
+			function showdetail(obj){
+				for(var i=0;i<userRow.length;i++){
+			    	if(userRow[i].login==obj.id){
+			    		var user = userRow[i];
+			    		
+			    		document.getElementById("leftBoxImage").src=user.avatar_url;
+			    		document.getElementById("userLogin").innerText = user.login;
+			    		document.getElementById("userName").innerText = user.name;
+			       	 	document.getElementById("leftBoxType").innerText = user.type;
+			       	 	document.getElementById("leftBoxLanguage").innerText=user.mainLanguage;
+			       	 	document.getElementById("leftBoxCreateAt").innerText=user.created_at;
+			       	 	 
+			       	    break;
+			    	}                                           
+				}
+			}	
+			        
+			function previousPage() {
+				urlstr = "/userSearch #userList";
+				if (currentpage > 0) {
+					currentpage -= 1;
+					$("#userBoxBody").load(urlstr, {
+						key: currentkey,
+						page: currentpage
+					});
+					$("#pageNum").html("<a>" + (currentpage + 1) + "</a>");
+				}
+			}
+
+			function nextPage() {
+				urlstr = "/userSearch #userList";
+				if (currentpage < totalpagenum - 1) {
+					currentpage += 1;
+					$("#userBoxBody").load(urlstr, {
+						key: currentkey,
+						page: currentpage
+					});
+					$("#pageNum").html("<a>" + (currentpage + 1) + "</a>");
+				}
+			}
+
+			function getJsonList(sortType, pageIndex) {
+				$.getJSON("/userJsonSearch", {
+					key: currentkey,
+					page: pageIndex
+				}, function(data) {
+					userRow = data;
+				});
+			}
+		</script>
+
+	</head>
+	<!--
+  BODY TAG OPTIONS:
+  =================
+  Apply one or more of the following classes to get the
+  desired effect
+  |---------------------------------------------------------|
+  | SKINS         | skin-blue                               |
+  |               | skin-black                              |
+  |               | skin-purple                             |
+  |               | skin-yellow                             |
+  |               | skin-red                                |
+  |               | skin-green                              |
+  |---------------------------------------------------------|
+  |LAYOUT OPTIONS | fixed                                   |
+  |               | layout-boxed                            |
+  |               | layout-top-nav                          |
+  |               | sidebar-collapse                        |
+  |               | sidebar-mini                            |
+  |---------------------------------------------------------|
+  -->
+
+	<body class="hold-transition fixed skin-blue sidebar-mini">
+
+		<div class="wrapper">
+
+			<!-- Main Header -->
+			<header class="main-header">
+
+				<!-- Logo -->
+				<a href="#" class="logo">
+					<!-- mini logo for sidebar mini 50x50 pixels -->
+					<span class="logo-mini"><b>G</b>IT</span>
+					<!-- logo for regular state and mobile devices -->
+					<span class="logo-lg pull-left"><img src = "custompics/main.png"><b>Git</b> Mining</span>
+				</a>
+
+				<!-- Header Navbar -->
+				<nav class="navbar navbar-static-top" role="navigation">
+					
+					<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+						<span class="sr-only">Toggle navigation</span>
+					</a>
+
+				<div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                       #parse("navUser.vm")
+                    </ul>
+                </div>
+
+				</nav>
+			</header>
+
+			<!-- Left side column. contains the logo and sidebar -->
+			<aside class="main-sidebar">
+
+				<!-- sidebar: style can be found in sidebar.less -->
+				<section class="sidebar">
+
+					<!-- Sidebar user panel (optional) -->
+					<div class="user-panel">
+						<div class="pull-left image">
+							<img src=$user.getAvatar_url() class="img-circle" alt="User Image">
+						</div>
+						<div class="pull-left info">
+							<p>$user.account</p>
+							<!-- Status -->
+							<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+						</div>
+					</div>
+
+					<!-- Sidebar Menu -->
+					<ul class="sidebar-menu">
+							
+							<li><a a href="userDetail?login=$user.gitid"><i class="fa fa-github-alt"></i> <span>Detail</span></a></li>
+							<li><a href="/followCollection?account=$user.account"><i class="fa fa-star-o"></i> <span>Collection</span></a></li>
+							<li><a href="/watch?account=$user.account"><i class="fa fa-eye"></i> <span>Watch</span></a></li>
+							<li class="active"><a href="/home"><i class="fa fa-search"></i> <span>Search</span></a></li>
+	
+							<li class="treeview">
+								<a href="#"><i class="fa fa-bar-chart"></i> <span>Statistics</span> <i class="fa fa-angle-left pull-right"></i></a>
+								<ul class="treeview-menu">
+									<li><a href="/userChartTest"><i class="fa fa-users"></i>User</a></li>
+									<li><a href="/repoChartTest"><i class="fa fa-book"></i>Repository</a></li>
+								</ul>
+							</li>
+	
+					</ul>
+					<!-- /.sidebar-menu -->
+				</section>
+				<!-- /.sidebar -->
+			</aside>
+
+			<!-- Content Wrapper. Contains page content -->
+			<div class="content-wrapper">
+				<!-- Content Header (Page header) -->
+				<section class="my-content-header content-header">
+					<h1>
+            Users
+            <small>search for awesome Git users</small>
+          </h1>
+					<ol class="breadcrumb">
+						<li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
+						<li class="active">Users</li>
+					</ol>
+				</section>
+
+				<!-- Main content -->
+				<!--            <section class="container content">-->
+
+				<!-- Your Page Content Here -->
+
+				<div class="row">
+					<div class="col-md-8 column my-column-left">
+
+						<div class="box box-primary">
+							<div class="box-header with-border">
+								<h3 class="box-title">User search result</h3>
+								<div class="box-tools">
+
+									<form role=form>
+										<div class="input-group" style="width: 250px;">
+											<input type="text" name="key" class="form-control input-sm pull-right" placeholder="Search for awesome users..." style="font-size:15px">
+											<div class="input-group-btn">
+												<button class="btn btn-sm btn-default" type="submit"><i class="fa fa-search"></i></button>
+											</div>
+										</div>
+									</form>
+
+								</div>
+
+							</div>
+							<!-- /.box-header -->
+							<div id="userBoxBody" class="box-body">
+								<ul id="userList" class="products-list product-list-in-box">
+
+									#foreach($userInfo in $userInfoList)
+									<li class="item" id="${userInfo.login}" onclick="showdetail(this)">
+										<div class="product-img">
+											<img src="${userInfo.avatar_url}" alt="Product Image">
+										</div>
+										<div class="product-info">
+											<a href="/userDetail?login=${userInfo.login}" class="product-title" style="font-size:15px">
+                            ${userInfo.login} 
+                          <span class="label label-info pull-right my-user-label">repos:${userInfo.createdRepoNum}</span>
+                          <span class="label label-warning pull-right my-user-label">following:${userInfo.following}</span>
+                          <span class="label label-danger pull-right my-user-label">followers:${userInfo.followers}</span></a>
+											<span class="product-description" style="font-size:14px">
+                          ${userInfo.name}<br/> ${userInfo.email}
+                        </span>
+										</div>
+									</li>
+									<!-- /.item -->
+									#end
+								</ul>
+							</div>
+							<!-- /.box-body -->
+							<div class="box-footer text-center">
+								<ul class="pagination pagination-sm no-margin pull-right">
+									<li onclick="previousPage()"><a>&laquo;</a></li>
+									<li id="pageNum"><a>1</a></li>
+									<li onclick="nextPage()"><a>&raquo;</a></li>
+								</ul>
+							</div>
+							<!-- /.box-footer -->
+						</div>
+						<!-- /.box -->
+
+					</div>
+					<div class="col-md-4 column my-column-right">
+
+						<div class="box box-info" >
+							<!-- Add the bg color to the header using any of the bg-* classes -->
+							<div class="widget-user-header" style="padding:10px;text-align: center;">
+								#if($userInfoList.size()>0)
+                                  	<img id="leftBoxImage" src="${userInfoList[0].avatar_url}" class="pull-center" width="100px" height="100px" alt="Product Image">
+                                #else
+									<img id="leftBoxImage" src="custompics/nophoto.png" class="pull-center" width="100px" height="100px" alt="Product Image">
+                                #end
+								
+								<h3 id="userLogin" class="widget-user-username" style="margin-left:8px;margin-top:10px;font-weight:600">
+                                  #if($userInfoList.size()>0)
+                                  	${userInfoList[0].login}
+                                  #else
+									nothing
+                                  #end
+                                </h3>
+								<h5 id="userName" class="widget-user-desc" style="margin-left:25px;margin-top:10px;font-size:16px">
+                                  #if($userInfoList.size()>0)
+                                  	${userInfoList[0].name}
+                                  #else
+									nothing
+                                  #end
+                                </h5>
+							</div>
+							<div class="box-footer no-padding" style="border-left:5px">
+								<ul class="nav nav-stacked">
+									<li>
+										<a>Type
+											<span id="leftBoxType" class="pull-right badge bg-blue">
+												#if($userInfoList.size()>0)
+                                  					${userInfoList[0].type}
+                                  				#else
+													nothing
+                                  				#end
+											</span>
+										</a>
+									</li>
+									<li>
+										<a>Main language
+											<span id="leftBoxLanguage" class="pull-right badge bg-aqua">
+												#if($userInfoList.size()>0)
+                                  					${userInfoList[0].mainLanguage}
+                                  				#else
+													nothing
+                                  				#end
+											</span>
+										</a>
+									</li>
+									<li>
+										<a>Created at
+											<span id="leftBoxCreateAt" class="pull-right badge bg-green">
+												#if($userInfoList.size()>0)
+                                  					${userInfoList[0].getCreatedDateString()}
+                                  				#else
+													nothing
+                                  				#end
+											</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!-- /.widget-user -->
+
+                        
+                        
+                                                  <div class="col-md-12 column" id="repoLanguageGraphics" style="padding:0;padding-top:20px">
+                          <div id="repoLanguage"></div>
+                              
+                            <script type="text/javascript">
+                                var w1 = $("#repoLanguageGraphics").innerWidth();
+                                var h1 = 480;
+
+                                $("#repoLanguage").width(w1);
+                                $("#repoLanguage").height(h1);
+                            </script>
+
+
+                            <script type="text/javascript">
+                                $(window).resize(function () {
+
+                                    var w1 = $("#repoLanguageGraphics").innerWidth();
+                                    var h1 = 480;
+
+                                    $("#repoLanguage").width(w1);
+                                    $("#repoLanguage").height(h1);
+
+                                });
+                            </script>
+                            
+                            <script type="text/javascript">
+                                
+                                var myChartlg = echarts.init(document.getElementById('repoLanguage'));
+
+                                option = {
+                                    tooltip: {
+                                        trigger: 'item',
+                                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                                    },
+                                    legend: {
+                                        orient: 'horizontal',
+                                        x: 'left',
+                                        data: []
+                                    },
+                                    series: [
+                                        {
+                                            name: 'Coding',
+                                            left: 0,
+                                            type: 'pie',
+                                            radius: ['50%', '70%'],
+                                            avoidLabelOverlap: false,
+                                            label: {
+                                                normal: {
+                                                    show: false,
+                                                    position: 'center'
+                                                },
+                                                emphasis: {
+                                                    show: true,
+                                                    textStyle: {
+                                                        fontSize: '30',
+                                                        fontWeight: 'bold'
+                                                    }
+                                                }
+                                            },
+                                            labelLine: {
+                                                normal: {
+                                                    show: false
+                                                }
+                                            },
+                                            data: []
+                                        }
+                                        ]
+                                };
+                                
+
+                                myChartlg.setOption(option);
+                                myChartlg.showLoading();
+
+                                
+                                $.getJSON("/classify/userLanguage",{key:currentkey},function(data){
+
+                                    myChartlg.hideLoading();
+                                    var languageCategories = [];
+                                    var languageLineNumbers = [];
+                                    var dataResult = [];
+
+                                    languageCategories = data["xData"];
+                                    languageLineNumbers = data["yData"];
+
+                                    for(var i=0; i<languageCategories.length;i++){
+                                        var x = {};
+                                        x["name"] = languageCategories[i];
+                                        x["value"] = languageLineNumbers[i];
+                                        dataResult = dataResult.concat(x);
+                                    }
+
+                                    setLanguageData({
+                                        data: dataResult,
+                                        categories: languageCategories
+                                    });
+                                })
+
+                                function setLanguageData(data) {
+                                    myChartlg.setOption({
+                                       legend:{
+                                           data: data.categories
+                                       },
+                                        series:{
+                                            data:data.data
+                                        }
+                                    });
+                                }
+
+                                $(window).resize(function () {
+                                    $(myChartlg).resize();
+                                })
+                            
+                            </script>
+
+                        </div>
+                        
+					</div>
+				</div>
+
+				<!--            </section>-->
+				<!-- /.content -->
+			</div>
+			<!-- /.content-wrapper -->
+
+			#include("footer.vm")
+
+			
+		</div>
+
+		
+
+	</body>
+
+</html>

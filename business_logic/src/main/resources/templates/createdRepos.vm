@@ -1,0 +1,29 @@
+
+            <thead>
+                <tr>
+                    <th>RepoName</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                #foreach($repo in $repoInfoList)
+                <tr>
+                    <td>
+                        <i class="fa fa-book"></i> 
+                        
+                        <a href="/repoDetail?owner=$repo.getOwnerName()&repoName=$repo.getReposName()">
+                        $repo.full_name
+                            </a>
+                            
+                    </td>
+                </tr>
+
+                #end
+
+
+
+            </tbody>
+  

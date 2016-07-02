@@ -1,0 +1,12 @@
+
+who: 申彬 石若非 刘璇琳 生宸
+when:第三周
+what: 确定了以下4张panel的详细细节部分
+	1.搜索仓库
+	2.搜索user
+	3.仓库详情
+	4.user详情
+      例搜索部分列表的设计 contentPane->SearchPagePane->JScrollPane->ListPane
+
+how long: 0.5h
+arrived solution：决定了界面原型

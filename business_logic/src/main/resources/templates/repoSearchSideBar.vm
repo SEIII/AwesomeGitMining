@@ -1,0 +1,16 @@
+<ul class="sidebar-menu">
+
+	<li><a a href="userDetail?login=$user.gitid"><i class="fa fa-github-alt"></i> <span>Detail</span></a></li>
+	<li><a href="/followCollection?account=$user.account"><i class="fa fa-star-o"></i> <span>Collection</span></a></li>
+	<li><a href="/watch?account=$user.account"><i class="fa fa-eye"></i> <span>Watch</span></a></li>
+	<li class="active"><a href="/home"><i class="fa fa-search"></i> <span>Search</span></a></li>
+
+	<li class="treeview">
+		<a href="#"><i class="fa fa-bar-chart"></i> <span>Statistics</span> <i class="fa fa-angle-left pull-right"></i></a>
+		<ul class="treeview-menu">
+			<li><a href="/userChartTest"><i class="fa fa-users"></i>User</a></li>
+			<li><a href="/repoChartTest"><i class="fa fa-book"></i>Repository</a></li>
+		</ul>
+	</li>
+
+</ul>

@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+          page. However, you can choose any other skin. Make sure you
+          apply the skin class to the body tag so the changes take effect.
+    -->
+    <link rel="stylesheet" href="dist/css/skins/skin-blue.css">
+
+
+    <!-- iCheck -->
+    <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+
+
+
+    <title>My-AweSome-GitMiNing</title>
+    <!-- jQuery 2.1.4 -->
+    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+
+    <script src="echarts.min.js"></script>
+
+
+
+    <!-- jQuery UI 1.11.4 -->
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+
+    <!-- jQuery Knob Chart -->
+    <script src="plugins/knob/jquery.knob.js"></script>
+    <!-- daterangepicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- datepicker -->
+    <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+    <!-- Bootstrap WYSIHTML5 -->
+    <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <!-- SlimScroll -->
+    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="plugins/fastclick/fastclick.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/app.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
+    <!-- page script -->
+
+
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="dist/js/pages/dashboard.js"></script>
+
+
+    <!-- Optionally, you can add Slimscroll and FastClick plugins.
+         Both of these plugins are recommended to enhance the
+         user experience. Slimscroll is required when using the
+         fixed layout. -->
+    <script type="text/javascript">
+        function goRadar() {
+            var a = $("#repoRadar").offset().top - document.getElementById("mainheader").offsetHeight;
+            $("html,body").animate({
+                scrollTop: a
+            }, 'slow');
+        }
+    </script>
+
+    <script type="text/javascript">
+        function goLanguage() {
+            var a = $("#repoLanguage").offset().top - document.getElementById("mainheader").offsetHeight;
+            $("html,body").animate({
+                scrollTop: a
+            }, 'slow');
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        function goTop() {
+            var toTop = 0;
+            $("html,body").animate({
+                scrollTop: toTop
+            }, 'slow');
+        }
+    </script>
+
+    <script type="text/javascript">
+        
+
+       var gitRepo = "${repoinfo.getFull_name()}";
+       var userAccount = "${user.account}";
+
+    
+        function clickFollow(){
+            
+            $.post("/repoFollow",
+                      {
+                account: "${user.account}",
+                followInfo: '{\
+                    "repofullname": "${repoinfo.getFull_name()}",\
+                    "description": "${repoinfo.getDescription()}",\
+                    "mainLanguage": "${repoinfo.getLanguage()}",\
+                    "star": ${repoinfo.getStargazers_count()},\
+                    "fork": ${repoinfo.getForks_count()},\
+                    "issue": ${repoinfo.getOpen_issues_count()},\
+                    "size": ${repoinfo.getSizeInMBDouble()}\
+                }'
+                
+            }
+                      ,function(data){
+                alert(data);
+            });
+        }
+    
+    </script>
+
+
+</head>
+<!--
+  BODY TAG OPTIONS:
+  =================
+  Apply one or more of the following classes to get the
+  desired effect
+  |---------------------------------------------------------|
+  | SKINS         | skin-blue                               |
+  |               | skin-black                              |
+  |               | skin-purple                             |
+  |               | skin-yellow                             |
+  |               | skin-red                                |
+  |               | skin-green                              |
+  |---------------------------------------------------------|
+  |LAYOUT OPTIONS | fixed                                   |
+  |               | layout-boxed                            |
+  |               | layout-top-nav                          |
+  |               | sidebar-collapse                        |
+  |               | sidebar-mini                            |
+  |---------------------------------------------------------|
+  -->
+
+<body class="hold-transition fixed skin-blue sidebar-mini">
+    <div class="wrapper">
+
+        <!-- Main Header -->
+        <header class="main-header" id="mainheader">
+
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>G</b>IT</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg pull-left"><img src = "custompics/main.png"><b>Git</b> Mining</span>
+            </a>
+
+
+
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+
+
+              <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                       #parse("navUser.vm")
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+
+
+
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src=$user.getAvatar_url() class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p>$user.account</p>
+                        <!-- Status -->
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+	         	<ul class="sidebar-menu">
+	
+					<li><a a href="userDetail?login=$user.gitid"><i class="fa fa-github-alt"></i> <span>Detail</span></a></li>
+					<li><a href="/followCollection?account=$user.account"><i class="fa fa-star-o"></i> <span>Collection</span></a></li>
+					<li><a href="/watch?account=$user.account"><i class="fa fa-eye"></i> <span>Watch</span></a></li>
+					<li><a href="/home"><i class="fa fa-search"></i> <span>Search</span></a></li>
+	
+					<li class="treeview">
+						<a href="#"><i class="fa fa-bar-chart"></i> <span>Statistics</span> <i class="fa fa-angle-left pull-right"></i></a>
+						<ul class="treeview-menu">
+							<li><a href="/userChartTest"><i class="fa fa-users"></i>User</a></li>
+							<li><a href="/repoChartTest"><i class="fa fa-book"></i>Repository</a></li>
+						</ul>
+					</li>
+	
+				</ul>
+                <!-- /.sidebar-menu -->
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+            Repository
+            <small>Awesome Repo Info.</small>
+          </h1>
+
+                <br>
+                <br>
+
+
+                <ol class="breadcrumb">
+                    <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li class="active">Repository</li>
+                    <li class="active">$repoinfo.reposName</li>
+                </ol>
+            </section>
+
+
+
+            <!-- Main content -->
+
+            <div class="row clearfix">
+                <div class="col-md-3 column">
+                    <div class="row clearfix">
+                        <div class="col-md-2 column"></div>
+                        <div class="col-md-10 column">
+                            <!-- Profile Image -->
+                            <div class="box box-primary" style="height:394px">
+                                <div class="box-body box-profile">
+                                    <img class="profile-user-img img-responsive img-square" src="custompics/repoAvatar.jpg" alt="User profile picture">
+                                    <h3 class="profile-username text-center">$repoinfo.reposName</h3>
+                                    <p class="text-muted text-center">$repoinfo.ownerName</p>
+
+                                    <ul class="list-group list-group-unbordered">
+                                        <li class="list-group-item">
+                                            <i class="fa fa-star-o"></i><span> Star</span>
+                                            <span class="label label-primary pull-right">$repoinfo.stargazers_count</span>
+                                        </li>
+
+                                        <li class="list-group-item">
+                                            <i class="fa fa-code-fork"></i><span> Fork</span>
+                                            <span class="label label-info pull-right">$repoinfo.forks_count</span>
+                                        </li>
+
+                                        <li class="list-group-item">
+                                            <i class="fa fa-users"></i><span> Issue</span>
+                                            <span class="label label-warning pull-right">$repoinfo.getOpen_issues_count()</span>
+                                        </li>
+                                    </ul>
+
+                                    <a id="followBtn" onclick=clickFollow() class="btn btn-primary btn-block"><b>Follow</b></a>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+                            <!-- About Me Box -->
+                            <div class="box box-primary" style="height:350px">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">More Details</h3>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body">
+
+
+                                    <ul class="list-group list-group-unbordered">
+
+
+                                        <li class="list-group-item">
+                                            <i class="glyphicon glyphicon-book"></i><span> Size</span>
+                                            <span class="label label-primary pull-right">$repoinfo.getSizeInMB() MB</span>
+                                        </li>
+
+                                        <li class="list-group-item">
+                                            <i class="fa fa-code"></i><span> Language</span>
+                                            <span class="label label-info pull-right">$repoinfo.language</span>
+                                        </li>
+
+
+                                        <li class="list-group-item">
+                                            <i class="fa fa-cloud-upload"></i><span> Created</span>
+                                            <span class="label label-danger pull-right">$repoinfo.getCreatedDateString()</span>
+                                        </li>
+
+
+                                        <li class="list-group-item">
+                                            <i class="fa fa-refresh"></i><span> Last Updated</span>
+                                            <span class="label label-warning pull-right">$repoinfo.getUpdatedDateString()</span>
+                                        </li>
+                                    </ul>
+
+                                    <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+
+                                    <p>
+                                        $repoinfo.description
+
+                                    </p>
+
+
+
+
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+                <div class="col-md-9 column">
+                    <div class="row clearfix">
+                        <div class="col-md-11">
+                            <div class="row clearfix">
+                                <div class="col-md-12 column">
+
+                                    <div class="row clearfix">
+
+
+                                        <div class="col-md-6 column">
+
+                                            <div class="box box-primary">
+
+                                                <div class="box-header with-border">
+                                                    <h3 class="box-title">Radar</h3>
+                                                </div>
+
+                                                <div class="box-body" id="repoRadar">
+                                                    <div id="radarContainer"></div>
+
+                                                    <script type="text/javascript">
+                                                        var w1 = $("#repoRadar").innerWidth();
+                                                        //                                        var h1 = $("#repoRadar").innerWidth();
+                                                        var h1 = 329;
+
+                                                        $("#radarContainer").width(w1);
+                                                        $("#radarContainer").height(h1);
+                                                    </script>
+
+
+                                                    <script type="text/javascript">
+                                                        $(window).resize(function () {
+
+                                                            var w1 = $("#repoRadar").innerWidth();
+                                                            //                                            var h1 = $("#repoRadar").innerWidth();
+                                                            var h1 = 329;
+
+                                                            $("#radarContainer").width(w1);
+                                                            $("#radarContainer").height(h1);
+
+                                                        });
+                                                    </script>
+
+
+                                                    <script type="text/javascript">
+                                                        var myChartrd = echarts.init(document.getElementById('radarContainer'));
+                                                        option = {
+
+                                                            tooltip: {},
+                                                            legend: {
+                                                                data: ['']
+                                                            },
+                                                            radar: {
+                                                                // shape: 'circle',
+                                                                indicator: [
+                                                                    {
+                                                                        name: 'Star',
+                                                                        max: 10
+                                                    },
+                                                                    {
+                                                                        name: 'Fork',
+                                                                        max: 10
+                                                    },
+                                                                    {
+                                                                        name: 'Issue',
+                                                                        max: 10
+                                                    },
+                                                                    {
+                                                                        name: 'Create',
+                                                                        max: 10
+                                                    },
+                                                                    {
+                                                                        name: 'Update',
+                                                                        max: 10
+                                                    },
+                                                                    {
+                                                                        name: 'Value',
+                                                                        max: 10
+                                                    }
+                                                ]
+                                                            },
+                                                            series: [{
+                                                                name: 'repoinfo',
+                                                                type: 'radar',
+
+                                                                data: [
+                                                                    {
+                                                                        value: [0, 0, 0, 0, 0, 0],
+                                                                        name: 'repoinfo'
+                                                    }
+                                                ]
+                                            }]
+                                                        };
+
+                                                        myChartrd.setOption(option);
+                                                        myChartrd.showLoading();
+
+
+                                                        $.getJSON("/statSingleRepo/radar?owner=$repoinfo.ownerName&repoName=$repoinfo.reposName", function (data) {
+                                                            myChartrd.hideLoading();
+                                                            var list1 = [];
+                                                            list1 = data["yData"];
+
+
+
+                                                            $("#forkValue").data("targetValue", list1[1]);
+                                                            $("#vValue").data("targetValue", list1[5]);
+                                                            $("#updateValue").data("targetValue", list1[4]);
+                                                            $("#openissueValue").data("targetValue", list1[2]);
+                                                            $("#starValue").data("targetValue", list1[0]);
+                                                            $("#createValue").data("targetValue", list1[3]);
+                                                            $("#valueCount").html("$"+list1[6]);
+                                                            
+                                                            
+                                                            $('.knob').each(function () { //each .knob
+                                                                $(this).animate({ //animate to data targetValue
+                                                                    value: $(this).data('targetValue') * 10
+                                                                }, {
+                                                                    duration: 1000,
+                                                                    easing: 'swing',
+                                                                    progress: function () {
+                                                                        $(this).val(Math.round(this.value)).trigger('change')
+                                                                    }
+                                                                });
+                                                            });
+
+
+
+
+
+                                                            setData({
+                                                                data: list1
+                                                            });
+                                                        });
+
+
+                                                        function setData(data) {
+
+                                                            myChartrd.setOption({
+                                                                series: [{
+                                                                    name: 'repoinfo',
+                                                                    type: 'radar',
+
+                                                                    data: [
+                                                                        {
+                                                                            value: data.data,
+                                                                            name: 'repoinfo'
+                                                    }
+                                                ]
+                                            }]
+                                                            });
+                                                        }
+
+                                                        $(window).resize(function () {
+
+                                                            $(myChartrd).resize();
+                                                        })
+                                                    </script>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+
+                                        <div class="col-md-6 column">
+
+                                            <div class="box box-primary">
+
+                                                <div class="box-header with-border">
+                                                    <h3 class="box-title">Score</h3>
+                                                </div>
+
+                                                <div class="box-body" style="height:348px">
+                                                    
+                                                    
+                                                    
+                                                        
+                                                    <div style="background-color:#ffffff;border-color:#0097bc">
+                                                    
+                                                    <center>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:300;font-size:16px;opacity:0.9">The estimated total value of this repository is  </span>
+                                                    <span id="valueCount" style="font-family:Microsoft YaHei;font-weight:400;font-size:20px;opacity:1">  - </span>
+                                                    
+                                                    </center>
+                                                    
+                                                </div>
+                                                    
+                                                    <hr>
+                                                
+                                                    
+                                                    
+                                                    <!-- solid sales graph -->
+                                                    <div class="box box-solid bg-teal-gradient">
+                                                        <div class="box-footer no-border">
+                                                            <div class="row">
+                                                                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                                                                    <input id="forkValue" type="text" class="knob" data-readonly="true" value="0" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                                                                    <div class="knob-label">Fork</div>
+                                                                </div>
+                                                                <!-- ./col -->
+                                                                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                                                                    <input id="vValue" type="text" class="knob" data-readonly="true" value="0" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                                                                    <div class="knob-label">Value</div>
+                                                                </div>
+                                                                <!-- ./col -->
+                                                                <div class="col-xs-4 text-center">
+                                                                    <input id="updateValue" type="text" class="knob" data-readonly="true" value="0" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                                                                    <div class="knob-label">Update</div>
+                                                                </div>
+                                                                <!-- ./col -->
+                                                            </div>
+                                                            <!-- /.row -->
+                                                        </div>
+                                                        <!-- /.box-footer -->
+                                                    </div>
+                                                    <!-- /.box -->
+
+                                                    <br>
+                                                   
+
+                                                    <!-- solid sales graph -->
+                                                    <div class="box box-solid bg-teal-gradient">
+                                                        <div class="box-footer no-border">
+                                                            <div class="row">
+                                                                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                                                                    <input id="openissueValue" type="text" class="knob" data-readonly="true" value="0" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                                                                    <div class="knob-label">Open-issue</div>
+                                                                </div>
+                                                                <!-- ./col -->
+                                                                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                                                                    <input id="starValue" type="text" class="knob" data-readonly="true" value="0" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                                                                    <div class="knob-label">Star</div>
+                                                                </div>
+                                                                <!-- ./col -->
+                                                                <div class="col-xs-4 text-center">
+                                                                    <input id="createValue" type="text" class="knob" data-readonly="true" value="0" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                                                                    <div class="knob-label">Create</div>
+                                                                </div>
+                                                                <!-- ./col -->
+                                                            </div>
+                                                            <!-- /.row -->
+                                                        </div>
+                                                        <!-- /.box-footer -->
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <!-- /.box -->
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-md-12 column">
+                                    <div class="row clearfix">
+                                        <div class="col-md-6 column" id="repoLanguageGraphics">
+
+                                            <div class="box box-primary" style="height:350px">
+
+                                                <div class="box-header with-border">
+                                                    <h3 class="box-title">Language</h3>
+                                                </div>
+
+                                                <div class="box-body">
+                                                    <div id="repoLanguage"> </div>
+
+                                                    <script type="text/javascript">
+                                                        var w1 = $("#repoLanguageGraphics").innerWidth();
+                                                        //                                        var h1 = $("#repoRadar").innerWidth();
+                                                        var h1 = 320;
+
+                                                        $("#repoLanguage").width(w1);
+                                                        $("#repoLanguage").height(h1);
+                                                    </script>
+
+
+                                                    <script type="text/javascript">
+                                                        $(window).resize(function () {
+
+                                                            var w1 = $("#repoLanguageGraphics").innerWidth();
+                                                            //                                            var h1 = $("#repoRadar").innerWidth();
+                                                            var h1 = 320;
+
+                                                            $("#repoLanguage").width(w1);
+                                                            $("#repoLanguage").height(h1);
+
+                                                        });
+                                                    </script>
+
+
+                                                    <script type="text/javascript">
+                                                        var myChartlg = echarts.init(document.getElementById('repoLanguage'));
+
+                                                        option = {
+                                                            tooltip: {
+                                                                trigger: 'item',
+                                                                formatter: "{a} <br/>{b}: {c} ({d}%)"
+                                                            },
+                                                            legend: {
+                                                                orient: 'horizontal',
+                                                                x: 'left',
+                                                                data: []
+                                                            },
+                                                            series: [
+                                                                {
+                                                                    name: 'Coding',
+                                                                    left: 0,
+                                                                    type: 'pie',
+                                                                    radius: ['50%', '70%'],
+                                                                    avoidLabelOverlap: false,
+                                                                    label: {
+                                                                        normal: {
+                                                                            show: false,
+                                                                            position: 'center'
+                                                                        },
+                                                                        emphasis: {
+                                                                            show: true,
+                                                                            textStyle: {
+                                                                                fontSize: '30',
+                                                                                fontWeight: 'bold'
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    labelLine: {
+                                                                        normal: {
+                                                                            show: false
+                                                                        }
+                                                                    },
+                                                                    data: []
+        }
+    ]
+                                                        };
+
+
+
+
+                                                        myChartlg.setOption(option);
+                                                        myChartlg.showLoading();
+
+                                                        $.getJSON("/statSingleRepo/languages?owner=$repoinfo.ownerName&repoName=$repoinfo.reposName", function (data) {
+
+                                                            myChartlg.hideLoading();
+                                                            var languageCategories = [];
+                                                            var languageLineNumbers = [];
+                                                            var dataResult = [];
+
+                                                            languageCategories = data["xData"];
+                                                            languageLineNumbers = data["yData"];
+
+                                                            for (var i = 0; i < languageCategories.length; i++) {
+                                                                var x = {};
+
+                                                                x["name"] = languageCategories[i];
+                                                                x["value"] = languageLineNumbers[i];
+
+
+
+                                                                dataResult = dataResult.concat(x);
+                                                            }
+
+                                                            setLanguageData({
+                                                                data: dataResult,
+                                                                categories: languageCategories
+                                                            });
+                                                        })
+
+                                                        function setLanguageData(data) {
+
+
+                                                            myChartlg.setOption({
+                                                                legend: {
+                                                                    data: data.categories
+                                                                },
+                                                                series: {
+                                                                    data: data.data
+                                                                }
+                                                            });
+                                                        }
+
+
+                                                        $(window).resize(function () {
+
+                                                            $(myChartlg).resize();
+                                                        })
+                                                    </script>
+
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+
+
+                                        </div>
+                                        <div class="col-md-6 column">
+                                            <!-- About Me Box -->
+                                            <div class="box box-primary" style="height:350px">
+                                                <div class="box-header with-border">
+                                                    <h3 class="box-title">Language Distribution</h3>
+                                                </div>
+                                                <!-- /.box-header -->
+                                                <div class="box-body">
+
+
+                                                    <ul class="list-group list-group-unbordered">
+
+                                                        #foreach($entry in $repoinfo.getLanguageMap().entrySet())
+                                                        <li class="list-group-item">
+                                                            <span class="label label-primary ">$entry.getKey()</span>
+                                                            <span class="pull-right">$entry.getValue()</span>
+                                                        </li>
+                                                        #end
+
+                                                    </ul>
+                                                </div>
+                                                <!-- /.box-body -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-md-1 column"></div>
+                <div class="col-md-10 column">
+                    <div class="row clearfix">
+
+                        <div class="col-md-12 column" id="repoCommit">
+
+                            <div class="box box-primary">
+
+
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Commit Last Week</h3>
+                                </div>
+
+                                <div class="box-body">
+
+
+                                    <div id="chart1"></div>
+
+
+                                    <script type="text/javascript">
+                                        var w1 = $("#repoCommit").width;
+                                        //                                        var h1 = $("#repoRadar").innerWidth();
+                                        var h1 = 450;
+
+                                        $("#chart1").width(w1);
+                                        $("#chart1").height(h1);
+                                    </script>
+
+
+                                    <script type="text/javascript">
+                                        $(window).resize(function () {
+
+                                            var w1 = $("#repoCommit").width;
+                                            //                                            var h1 = $("#repoRadar").innerWidth();
+                                            var h1 = 450;
+
+                                            $("#chart1").width(w1);
+                                            $("#chart1").height(h1);
+
+                                        });
+                                    </script>
+
+                                    <script type="text/javascript">
+                                        var myChart1 = echarts.init(document.getElementById('chart1'));
+                                        var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
+        '7a', '8a', '9a', '10a', '11a',
+        '12p', '1p', '2p', '3p', '4p', '5p',
+        '6p', '7p', '8p', '9p', '10p', '11p'];
+                                        var days = ['Saturday', 'Friday', 'Thursday',
+        'Wednesday', 'Tuesday', 'Monday', 'Sunday'];
+
+
+
+                                        option1 = {
+                                            title: {
+                                                text: 'Punch Card of Github',
+                                                link: 'https://github.com/pissang/echarts-next/graphs/punch-card'
+                                            },
+                                            legend: {
+                                                data: ['Punch Card'],
+                                                left: 'right'
+                                            },
+                                            tooltip: {
+                                                position: 'top',
+                                                formatter: function (params) {
+                                                    return params.value[2] + ' commits in ' + hours[params.value[0]] + ' of ' + days[params.value[1]];
+                                                }
+                                            },
+                                            grid: {
+                                                left: 2,
+                                                bottom: 10,
+                                                right: 10,
+                                                containLabel: true
+                                            },
+                                            xAxis: {
+                                                type: 'category',
+                                                data: hours,
+                                                boundaryGap: false,
+                                                splitLine: {
+                                                    show: true,
+                                                    lineStyle: {
+                                                        color: '#ddd',
+                                                        type: 'dashed'
+                                                    }
+                                                },
+                                                axisLine: {
+                                                    show: false
+                                                }
+                                            },
+                                            yAxis: {
+                                                type: 'category',
+                                                data: days,
+                                                axisLine: {
+                                                    show: false
+                                                }
+                                            },
+                                            series: [{
+                                                name: 'Punch Card',
+                                                type: 'scatter',
+                                                symbolSize: function (val) {
+
+                                                    return 30;
+
+
+                                                },
+                                                data: [],
+                                                
+                                                
+                                                itemStyle: {
+                                                  normal: {
+                                                      color: '#2c2c2c'
+                                                  }  
+                                                },
+                                                
+                                                animationDelay: function (idx) {
+                                                    return idx * 5;
+                                                }
+    }]
+                                        };
+                                        myChart1.setOption(option1);
+                                        myChart1.showLoading();
+
+                                        $.getJSON("https://api.github.com/repos/$repoinfo.getOwnerName()/$repoinfo.getReposName()/stats/punch_card", function (data) {
+
+                                            var max1 = 0;
+                                            var commitList = [];
+                                            commitList = data;
+                                            var commitListSize = commitList.length;
+                                            for (var index = 0; index < commitListSize; index++) {
+                                                var temp = commitList[index][2];
+                                                if (temp > max1)
+                                                    max1 = temp;
+                                            }
+
+
+                                            max1 = max1 + 10;
+
+                                            data = data.map(function (item) {
+                                                return [item[1], item[0], item[2]];
+                                            });
+
+                                            myChart1.hideLoading();
+
+                                            setData1({
+                                                max: max1,
+                                                data: data
+                                            });
+                                        })
+
+                                        function setData1(data) {
+
+
+
+                                            myChart1.setOption({
+                                                series: [{
+                                                    name: 'Punch Card',
+                                                    type: 'scatter',
+                                                    symbolSize: function (val) {
+                                                        return 42 * (val[2] / data.max)
+
+                                                    },
+                                                    data: data.data,
+                                                    animationDelay: function (idx) {
+                                                        return idx * 5;
+                                                    }
+    }]
+                                            });
+                                        }
+
+                                        $(window).resize(function () {
+
+                                            $(myChart1).resize();
+                                        })
+                                    </script>
+
+                                </div>
+
+                            </div>
+
+
+
+
+
+
+
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <br>
+            <div class="row clearfix">
+
+                <div class="col-md-1 column"></div>
+                <div class="col-md-10 column" id="codeFrequency">
+                    <div class="box box-primary">
+
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Code Frequency</h3>
+                        </div>
+
+                        <div class="box-body">
+
+
+
+
+                            <div id="chart2"></div>
+
+
+                            <script type="text/javascript">
+                                var w1 = $("#codeFrequency").width;
+                                //                                        var h1 = $("#repoRadar").innerWidth();
+                                var h1 = 450;
+
+                                $("#chart2").width(w1);
+                                $("#chart2").height(h1);
+                            </script>
+
+
+                            <script type="text/javascript">
+                                $(window).resize(function () {
+
+                                    var w1 = $("#codeFrequecny").width;
+                                    //                                            var h1 = $("#repoRadar").innerWidth();
+                                    var h1 = 450;
+
+                                    $("#chart2").width(w1);
+                                    $("#chart2").height(h1);
+
+                                });
+                            </script>
+
+                            <script type="text/javascript">
+                                var myChart2 = echarts.init(document.getElementById('chart2'));
+
+                                option2 = {
+                                    title: {
+                                        text: 'Code Frequency'
+                                    },
+                                    tooltip: {
+                                        trigger: 'axis'
+                                    },
+                                    legend: {
+                                        data: ['Addition', 'Deletion']
+                                    },
+                                    toolbox: {
+                                        feature: {
+                                            saveAsImage: {}
+                                        }
+                                    },
+                                    grid: {
+                                        left: '3%',
+                                        right: '4%',
+                                        bottom: '3%',
+                                        containLabel: true
+                                    },
+                                    xAxis: [
+                                        {
+                                            type: 'category',
+                                            boundaryGap: false,
+                                            data: []
+        }
+    ],
+                                    yAxis: [
+                                        {
+                                            type: 'value'
+        }
+    ],
+                                    series: [
+                                        {
+                                            name: 'Addition',
+                                            type: 'line',
+                                            areaStyle: {
+                                                normal: {}
+                                            },
+                                            data: [120, 132, 101, 134, 90, 230, 210],
+                                            itemStyle: {
+                                                normal: {
+                                                    color: '#6CC644'
+                                                }
+                                            }
+        },
+                                        {
+                                            name: 'Deletion',
+                                            type: 'line',
+                                            areaStyle: {
+                                                normal: {}
+                                            },
+                                            data: [-220, -182, -191, -234, -290, -330, -310],
+                                            itemStyle: {
+                                                normal: {
+                                                    color: '#BD2C00'
+                                                }
+                                            }
+        }
+    ]
+                                };
+                                myChart2.setOption(option2);
+                                myChart2.showLoading();
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                $.getJSON("/statSingleRepo/codeFrequency?owner=$repoinfo.getOwnerName()&repoName=$repoinfo.getReposName()", function (data) {
+                                            myChart2.hideLoading();
+                                            var addList = [];
+                                            var deleteList = [];
+                                            var result = [];
+                                            result = data;
+                                    
+                                            var length = result.length;
+                                            for(var index=0 ; index<length; index++){
+                                                var temp = result[index];
+                                                addList.push(temp['add']);
+                                                deleteList.push(-temp['delete']);
+                                            }
+                                    
+                                        setData2({
+                                            addList: addList,
+                                            deleteList: deleteList
+                                        });
+                                    
+                                        })
+
+                                        function setData2(data) {
+
+
+
+                                            myChart2.setOption({
+                                                series: [
+                                        {
+                                            name: 'Addition',                                          
+                                            data: data.addList
+        },
+                                        {
+                                            name: 'Deletion',
+                                            data: data.deleteList
+        }
+                                                    
+                                                    
+                                                    
+                                                ]
+                                            });
+                                        }
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                $(window).resize(function () {
+
+                                            $(myChart2).resize();
+                                        })
+                                
+                            </script>
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+       #include("footer.vm")
+    </div>
+    <!-- ./wrapper -->
+
+
+    <!--
+    <script>
+        $(document).ready(function () {
+            $("#qwerty").click(function () {
+                  var scroll_offset = $("#975255").offset().top;
+      
+                  $("body,html").animate({
+       
+        scrollTop: scroll_offset  
+      
+        }, 1000);
+            });
+        });
+    </script>
+-->
+    <!--
+    <script>
+      
+        $("#example1").DataTable({
+        "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": false,
+          "autoWidth": true
+        });
+        $('#example2').DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": false,
+          "autoWidth": true
+        });
+     
+    </script>
+-->
+</body>
+
+</html>

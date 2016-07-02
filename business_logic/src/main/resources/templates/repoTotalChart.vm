@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+          page. However, you can choose any other skin. Make sure you
+          apply the skin class to the body tag so the changes take effect.
+    -->
+    <link rel="stylesheet" href="dist/css/skins/skin-blue.css">
+
+
+    <title>My-AweSome-GitMiNing</title>
+    <!-- jQuery 2.1.4 -->
+    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="echarts.min.js"></script>
+
+
+
+    <!-- AdminLTE App -->
+    <script src="dist/js/app.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
+    <!-- page script -->
+
+
+</head>
+<!--
+  BODY TAG OPTIONS:
+  =================
+  Apply one or more of the following classes to get the
+  desired effect
+  |---------------------------------------------------------|
+  | SKINS         | skin-blue                               |
+  |               | skin-black                              |
+  |               | skin-purple                             |
+  |               | skin-yellow                             |
+  |               | skin-red                                |
+  |               | skin-green                              |
+  |---------------------------------------------------------|
+  |LAYOUT OPTIONS | fixed                                   |
+  |               | layout-boxed                            |
+  |               | layout-top-nav                          |
+  |               | sidebar-collapse                        |
+  |               | sidebar-mini                            |
+  |---------------------------------------------------------|
+  -->
+
+<body class="hold-transition fixed skin-blue sidebar-mini">
+    <div class="wrapper">
+
+        <!-- Main Header -->
+        <header class="main-header">
+
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>G</b>IT</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg pull-left"><img src = "custompics/main.png"><b>Git</b> Mining</span>
+            </a>
+
+
+
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+
+
+ 				<div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                       #parse("navUser.vm")
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+
+
+
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src=$user.getAvatar_url() class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p>$user.account</p>
+                        <!-- Status -->
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                 <ul class="sidebar-menu">
+						
+						<li><a a href="userDetail?login=$user.gitid"><i class="fa fa-github-alt"></i> <span>Detail</span></a></li>
+						<li><a href="/followCollection?account=$user.account"><i class="fa fa-star-o"></i> <span>Collection</span></a></li>
+						<li><a href="/watch?account=$user.account"><i class="fa fa-eye"></i> <span>Watch</span></a></li>
+						<li><a href="/home"><i class="fa fa-search"></i> <span>Search</span></a></li>
+
+						<li class="treeview active">
+							<a href="#"><i class="fa fa-bar-chart"></i> <span>Statistics</span> <i class="fa fa-angle-left pull-right"></i></a>
+							<ul class="treeview-menu">
+								<li><a href="/userChartTest"><i class="fa fa-users"></i>User</a></li>
+								<li class="active"><a href="/repoChartTest"><i class="fa fa-book"></i>Repository</a></li>
+							</ul>
+						</li>
+
+					</ul>
+                <!-- /.sidebar-menu -->
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+
+
+            <section class="content-header">
+                <h1>
+            Repository
+            <small>Awesome Repository Info.</small>
+          </h1>
+                <ol class="breadcrumb">
+                    <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li class="active">Repository</li>
+                    <li class="active">GitMiNing</li>
+                </ol>
+            </section>
+
+
+
+            <div class="row clearfix">
+                <br>
+                <br>
+                <div class="col-md-1 column">
+                </div>
+
+                <div class="col-md-10 column">
+
+                    <div class="carousel slide" id="carousel-totalchart">
+
+                        <ol class="carousel-indicators">
+                            <li class="active" data-slide-to="0" data-target="#carousel-totalchart">
+                            </li>
+                            <li data-slide-to="1" data-target="#carousel-totalchart">
+                            </li>
+                            <li data-slide-to="2" data-target="#carousel-totalchart">
+                            </li>
+                        </ol>
+
+                        <div class="carousel-inner">
+
+                            <div class="item active">
+                                <div id="starChartContainer" class="col-md-12 column">
+                                    <div id="starChart"></div>
+
+
+                                    <script type="text/javascript">
+                                        var w1 = $("#starChartContainer").innerWidth();
+                                        //                                        var h1 = $("#repoRadar").innerWidth();
+                                        var h1 = 500;
+
+                                        $("#starChart").width(w1);
+                                        $("#starChart").height(h1);
+                                    </script>
+
+
+                                    <script type="text/javascript">
+                                        $(window).resize(function () {
+
+                                            var w1 = $("#starChartContainer").innerWidth();
+                                            //                                        var h1 = $("#repoRadar").innerWidth();
+                                            var h1 = 500;
+
+                                            $("#starChart").width(w1);
+                                            $("#starChart").height(h1);
+
+                                        });
+                                    </script>
+
+
+                                    <script type="text/javascript">
+                                        var domStar = document.getElementById("starChart");
+                                        var myChartStar = echarts.init(domStar);
+                                        var appStar = {};
+
+
+                                        var optionStar = {
+                                            title: {
+                                                text: 'Star Distribution',
+                                                subtext: 'with repo number',
+                                                x: 'center'
+                                            },
+                                            tooltip: {
+                                                trigger: 'axis'
+                                            },
+                                            legend: {
+                                                data: ['repository Number'],
+                                                x: 'left'
+                                            },
+                                            toolbox: {
+                                                feature: {
+                                                    dataView: {
+                                                        show: true,
+                                                        readOnly: false
+                                                    },
+                                                    magicType: {
+                                                        show: true,
+                                                        type: ['line', 'bar']
+                                                    },
+                                                    restore: {
+                                                        show: true
+                                                    },
+                                                    saveAsImage: {
+                                                        show: true
+                                                    }
+                                                }
+                                            },
+                                            xAxis: {
+                                                type: 'category',
+                                                boundaryGap: false,
+                                                data: []
+                                            },
+                                            yAxis: {
+                                                type: 'value',
+                                                axisLabel: {
+                                                    formatter: '{value} '
+                                                }
+                                            },
+                                            series: [
+                                                {
+                                                    name: 'repository Number',
+                                                    type: 'line',
+                                                    data: [],
+                                                    markPoint: {
+                                                        data: [
+                                                            {
+                                                                type: 'number'
+                                                        },
+
+                	]
+                                                    },
+                                                    markLine: {
+                                                        data: [
+                                                            {
+                                                                type: 'average'
+                                                        }
+                	]
+                                                    },
+                                                    labelLine: {
+                                                        normal: {
+                                                            lineStyle: {
+                                                                color: '#26C0C0'
+                                                            }
+                                                        }
+                                                    },
+                                                    itemStyle: {
+                                                        normal: {
+                                                            color: '#26C0C0'
+                                                        }
+                                                    }
+        	}
+
+		]
+                                        };
+
+                                        myChartStar.setOption(optionStar);
+                                        myChartStar.showLoading();
+
+                                        $.getJSON("/statTotalRepos/star",
+                                                  {increment : 100}, function (data) {
+                                            myChartStar.hideLoading();
+
+                                            var list1Star = [];
+                                            var list2Star = [];
+                                            list2Star = data["yData"];
+                                            list1Star = data["xData"];
+
+                                            setdataStar({
+                                                categories: list1Star,
+                                                data: list2Star
+                                            });
+                                        });
+
+
+
+                                        function setdataStar(data) {
+                                            myChartStar.setOption({
+                                                xAxis: {
+                                                    data: data.categories
+                                                },
+                                                series: [{
+                                                    // 根据名字对应到相应的系列
+                                                    name: ' Number',
+                                                    data: data.data
+        }]
+                                            });
+                                        };
+                                    </script>
+                                </div>
+
+                            </div>
+
+
+                            <div class="item">
+                                <div id="forkChartContainer" class="col-md-12 column">
+                                    <div id="forkChart"></div>
+
+
+                                    <script type="text/javascript">
+                                        var w1 = $("#starChartContainer").innerWidth();
+                                        //                                        var h1 = $("#repoRadar").innerWidth();
+                                        var h1 = 500;
+
+                                        $("#forkChart").width(w1);
+                                        $("#forkChart").height(h1);
+                                    </script>
+
+
+                                    <script type="text/javascript">
+                                        $(window).resize(function () {
+
+                                            var w1 = $("#starChartContainer").innerWidth();
+                                            //                                        var h1 = $("#repoRadar").innerWidth();
+                                            var h1 = 500;
+
+                                            $("#forkChart").width(w1);
+                                            $("#forkChart").height(h1);
+
+                                        });
+                                    </script>
+
+
+                                    <script type="text/javascript">
+                                        var domFork = document.getElementById("forkChart");
+                                        var myChartFork = echarts.init(domFork);
+                                        var appFork = {};
+
+
+                                        var optionFork = {
+                                            title: {
+                                                text: 'Fork Distribution',
+                                                subtext: 'with repo number',
+                                                x: 'center'
+                                            },
+                                            tooltip: {
+                                                trigger: 'axis'
+                                            },
+                                            legend: {
+                                                data: ['repository Number'],
+                                                x: 'left'
+                                            },
+                                            toolbox: {
+                                                feature: {
+                                                    dataView: {
+                                                        show: true,
+                                                        readOnly: false
+                                                    },
+                                                    magicType: {
+                                                        show: true,
+                                                        type: ['line', 'bar']
+                                                    },
+                                                    restore: {
+                                                        show: true
+                                                    },
+                                                    saveAsImage: {
+                                                        show: true
+                                                    }
+                                                }
+                                            },
+                                            xAxis: {
+                                                type: 'category',
+                                                boundaryGap: false,
+                                                data: []
+                                            },
+                                            yAxis: {
+                                                type: 'value',
+                                                axisLabel: {
+                                                    formatter: '{value} '
+                                                }
+                                            },
+                                            series: [
+                                                {
+                                                    name: 'repository Number',
+                                                    type: 'line',
+                                                    data: [],
+                                                    markPoint: {
+                                                        data: [
+                                                            {
+                                                                type: 'number'
+                                                        },
+
+                	]
+                                                    },
+                                                    markLine: {
+                                                        data: [
+                                                            {
+                                                                type: 'average'
+                                                        }
+                	]
+                                                    },
+                                                    labelLine: {
+                                                        normal: {
+                                                            lineStyle: {
+                                                                color: '#26CC00'
+                                                            }
+                                                        }
+                                                    },
+                                                    itemStyle: {
+                                                        normal: {
+                                                            color: '#26CC00'
+                                                        }
+                                                    }
+        	}
+
+		]
+                                        };
+
+                                        myChartFork.setOption(optionFork);
+                                        myChartFork.showLoading();
+
+                                        $.getJSON("/statTotalRepos/fork",
+                                                  {
+                                            increment:50
+                                        }, function (data) {
+                                            myChartFork.hideLoading();
+
+                                            var list1Fork = [];
+                                            var list2Fork = [];
+                                            list2Fork = data["yData"];
+                                            list1Fork = data["xData"];
+
+                                            setdataFork({
+                                                categories: list1Fork,
+                                                data: list2Fork
+                                            });
+                                        });
+
+
+
+                                        function setdataFork(data) {
+                                            myChartFork.setOption({
+                                                xAxis: {
+                                                    data: data.categories
+                                                },
+                                                series: [{
+                                                    // 根据名字对应到相应的系列
+                                                    name: ' Number',
+                                                    data: data.data
+        }]
+                                            });
+                                        };
+                                    </script>
+                                </div>
+                            </div>
+
+
+                            <div class="item">
+                                <div id="contriChartContainer" class="col-md-12 column">
+                                    <div id="contriChart"></div>
+
+
+                                    <script type="text/javascript">
+                                        var w1 = $("#starChartContainer").innerWidth();
+                                        //                                        var h1 = $("#repoRadar").innerWidth();
+                                        var h1 = 500;
+
+                                        $("#contriChart").width(w1);
+                                        $("#contriChart").height(h1);
+                                    </script>
+
+
+                                    <script type="text/javascript">
+                                        $(window).resize(function () {
+
+                                            var w1 = $("#starChartContainer").innerWidth();
+
+                                            var h1 = 500;
+
+                                            $("#contriChart").width(w1);
+                                            $("#contriChart").height(h1);
+
+                                        });
+                                    </script>
+
+
+                                    <script type="text/javascript">
+                                        var domContri = document.getElementById("contriChart");
+                                        var myChartContri = echarts.init(domContri);
+                                        var appContri = {};
+
+
+                                        var optionContri = {
+                                            title: {
+                                                text: 'Contributor Distribution',
+                                                subtext: 'with repo number',
+                                                x: 'center'
+                                            },
+                                            tooltip: {
+                                                trigger: 'axis'
+                                            },
+                                            legend: {
+                                                data: ['repository Number'],
+                                                x: 'left'
+                                            },
+                                            toolbox: {
+                                                feature: {
+                                                    dataView: {
+                                                        show: true,
+                                                        readOnly: false
+                                                    },
+                                                    magicType: {
+                                                        show: true,
+                                                        type: ['line', 'bar']
+                                                    },
+                                                    restore: {
+                                                        show: true
+                                                    },
+                                                    saveAsImage: {
+                                                        show: true
+                                                    }
+                                                }
+                                            },
+                                            xAxis: {
+                                                type: 'category',
+                                                boundaryGap: false,
+                                                data: []
+                                            },
+                                            yAxis: {
+                                                type: 'value',
+                                                axisLabel: {
+                                                    formatter: '{value} '
+                                                }
+                                            },
+                                            series: [
+                                                {
+                                                    name: 'repository Number',
+                                                    type: 'line',
+                                                    data: [],
+                                                    markPoint: {
+                                                        data: [
+                                                            {
+                                                                type: 'number'
+                                                        },
+
+                	]
+                                                    },
+                                                    markLine: {
+                                                        data: [
+                                                            {
+                                                                type: 'average'
+                                                        }
+                	]
+                                                    },
+                                                    labelLine: {
+                                                        normal: {
+                                                            lineStyle: {
+                                                                color: 'rgb(233,195,65)'
+                                                            }
+                                                        }
+                                                    },
+                                                    itemStyle: {
+                                                        normal: {
+                                                            color: 'rgb(233,195,65)'
+                                                        }
+                                                    }
+        	}
+
+		]
+                                        };
+
+                                        myChartContri.setOption(optionContri);
+                                        myChartContri.showLoading();
+
+                                        $.getJSON("/statTotalRepos/contributor", function (data) {
+                                            myChartContri.hideLoading();
+
+                                            var list1Contri = [];
+                                            var list2Contri = [];
+                                            list2Contri = data["yData"];
+                                            list1Contri = data["xData"];
+
+                                            setdataContri({
+                                                categories: list1Contri,
+                                                data: list2Contri
+                                            });
+                                        });
+
+
+
+                                        function setdataContri(data) {
+                                            myChartContri.setOption({
+                                                xAxis: {
+                                                    data: data.categories
+                                                },
+                                                series: [{
+                                                    // 根据名字对应到相应的系列
+                                                    name: ' Number',
+                                                    data: data.data
+        }]
+                                            });
+                                        };
+                                    </script>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+                        <a class="left carousel-control" href="#carousel-totalchart" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+
+                        <a class="right carousel-control" href="#carousel-totalchart" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+                    </div>
+
+
+                    <div class="row clearfix">
+                        <div class="col-md-12 column">
+                            <div id="yearChartContainer">
+                                <div id="yearChart"></div>
+
+
+                                <script type="text/javascript">
+                                    var w1 = $("#yearChartContainer").innerWidth();
+                                    //                                        var h1 = $("#repoRadar").innerWidth();
+                                    var h1 = 500;
+
+                                    $("#yearChart").width(w1);
+                                    $("#yearChart").height(h1);
+                                </script>
+
+
+                                <script type="text/javascript">
+                                    $(window).resize(function () {
+
+                                        var w1 = $("#yearChartContainer").innerWidth();
+                                        //                                        var h1 = $("#repoRadar").innerWidth();
+                                        var h1 = 500;
+
+                                        $("#yearChart").width(w1);
+                                        $("#yearChart").height(h1);
+
+                                    });
+                                </script>
+
+
+                                <script type="text/javascript">
+                                    var domYear = document.getElementById("yearChart");
+                                    var myChartYear = echarts.init(domYear);
+                                    var appYear = {};
+
+
+                                    var optionYear = {
+                                        title: {
+                                            text: 'Repository Created Time',
+                                            x: 'center'
+                                        },
+                                        tooltip: {
+                                            trigger: 'axis'
+                                        },
+                                        legend: {
+                                            data: ['repository Number'],
+                                            x: 'left'
+                                        },
+                                        toolbox: {
+                                            feature: {
+                                                dataView: {
+                                                    show: true,
+                                                    readOnly: false
+                                                },
+                                                magicType: {
+                                                    show: true,
+                                                    type: ['line', 'bar']
+                                                },
+                                                restore: {
+                                                    show: true
+                                                },
+                                                saveAsImage: {
+                                                    show: true
+                                                }
+                                            }
+                                        },
+                                        xAxis: {
+                                            type: 'category',
+                                            boundaryGap: false,
+                                            data: []
+                                        },
+                                        yAxis: {
+                                            type: 'value',
+                                            axisLabel: {
+                                                formatter: '{value} '
+                                            }
+                                        },
+                                        series: [
+                                            {
+                                                name: 'repository Number',
+                                                type: 'line',
+                                                data: [],
+                                                markPoint: {
+                                                    data: [
+                                                        {
+                                                            type: 'number'
+                                                        },
+
+                	]
+                                                },
+                                                markLine: {
+                                                    data: [
+                                                        {
+                                                            type: 'average'
+                                                        }
+                	]
+                                                },
+                                                labelLine: {
+                                                    normal: {
+                                                        lineStyle: {
+                                                            color: '#26C0C0'
+                                                        }
+                                                    }
+                                                },
+                                                itemStyle: {
+                                                    normal: {
+                                                        color: '#26C0C0'
+                                                    }
+                                                }
+        	}
+
+		]
+                                    };
+
+                                    myChartYear.setOption(optionYear);
+                                    myChartYear.showLoading();
+
+                                    $.getJSON("/statTotalRepos/createTime", function(data) {
+                                        myChartYear.hideLoading();
+
+                                        var list1Year = [];
+                                        var list2Year = [];
+                                        list2Year = data["yData"];
+                                        list1Year = data["xData"];
+
+                                        setdataYear({
+                                            categories: list1Year,
+                                            data: list2Year
+                                        });
+                                    });
+
+
+
+                                    function setdataYear(data) {
+                                        myChartYear.setOption({
+                                            xAxis: {
+                                                data: data.categories
+                                            },
+                                            series: [{
+                                                // 根据名字对应到相应的系列
+                                                name: ' Number',
+                                                data: data.data
+        }]
+                                        });
+                                    };
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-12 column">
+                            <div id="languageChartContainer">
+                                <div id="main"></div>
+
+
+                                <script type="text/javascript">
+                                    var w1 = $("#languageChartContainer").innerWidth();
+                                    //                                        var h1 = $("#repoRadar").innerWidth();
+                                    var h1 = 500;
+
+                                    $("#main").width(w1);
+                                    $("#main").height(h1);
+                                </script>
+
+
+                                <script type="text/javascript">
+                                    $(window).resize(function () {
+
+                                        var w1 = $("#languageChartContainer").innerWidth();
+                                        //                                        var h1 = $("#repoRadar").innerWidth();
+                                        var h1 = 500;
+
+                                        $("#main").width(w1);
+                                        $("#main").height(h1);
+                                        
+                                    });
+                                </script>
+
+
+
+                                <script type="text/javascript">
+                                    var dom = document.getElementById("main");
+                                    var myChart = echarts.init(dom);
+                                    var app = {};
+
+                                    option = null;
+                                    option = {
+                                        title: {
+                                            text: 'Language statistic',
+                                            x: 'center'
+                                        },
+                                        tooltip: {
+                                            trigger: 'axis'
+                                        },
+                                        toolbox: {
+                                            feature: {
+                                                dataView: {
+                                                    show: true,
+                                                    readOnly: false
+                                                },
+                                                magicType: {
+                                                    show: true,
+                                                    type: ['line', 'bar']
+                                                },
+                                                restore: {
+                                                    show: true
+                                                },
+                                                saveAsImage: {
+                                                    show: true
+                                                }
+                                            }
+                                        },
+                                        legend: {
+                                            data: ['Number'],
+                                            x: 'left'
+                                        },
+                                        xAxis: [
+                                            {
+                                                type: 'category',
+                                                data: []
+        }
+    ],
+                                        yAxis: [
+                                            {
+                                                type: 'value',
+                                                name: 'Number',
+                                                min: 0,
+
+                                                interval: 15,
+                                                axisLabel: {
+                                                    formatter: '{value} million'
+                                                }
+        }
+    ],
+                                        series: [
+                                            {
+                                                name: 'Number',
+                                                type: 'bar',
+                                                data: [],
+                                                itemStyle:{
+                                                    normal:{
+                                                        color:'rgb(45,143,216)'
+                                                    }
+                                                },
+                                                
+                                                labelLine: {
+                                                    normal: {
+                                                        lineStyle: {
+                                                            color: '#26C0C0'
+                                                        }
+                                                    }
+                                                }
+
+        	}
+    ]
+                                    };
+                                    myChart.setOption(option);
+                                    myChart.showLoading();
+
+                                    $.getJSON("/statTotalRepos/language", function (data) {
+                                        myChart.hideLoading();
+                                        var list1 = [];
+                                        var list2 = [];
+                                        list2 = data["yData"];
+                                        list1 = data["xData"];
+
+                                        setdata({
+                                            categories: list1.slice(0, 10),
+                                            data: list2.slice(0, 10)
+                                        });
+                                    });
+
+
+
+                                    function setdata(data) {
+                                        myChart.setOption({
+                                            xAxis: {
+                                                data: data.categories
+                                            },
+                                            series: [{
+                                                // 根据名字对应到相应的系列
+                                                name: ' Number',
+                                                data: data.data
+        }]
+                                        });
+                                    };
+                                </script>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    
+                    <div class="carousel slide" id="carousel-relation">
+                        <ol class="carousel-indicators">
+                            <li class="active" data-slide-to="0" data-target="#carousel-relation">
+                            </li>
+                            <li data-slide-to="1" data-target="#carousel-relation">
+                            </li>
+                        
+                        </ol>
+                        
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                                        <div class="col-md-12 column">
+                            <div class="relationChartContainer">
+                                <div id="relationChart"></div>
+
+                                <script type="text/javascript">
+                                    var w1 = $("#languageChartContainer").innerWidth();
+                                    //                                        var h1 = $("#repoRadar").innerWidth();
+                                    var h1 = 500;
+
+                                    $("#relationChart").width(w1);
+                                    $("#relationChart").height(h1);
+                                </script>
+
+
+                                <script type="text/javascript">
+                                    $(window).resize(function () {
+
+                                        var w1 = $("#languageChartContainer").innerWidth();
+                                        //                                        var h1 = $("#repoRadar").innerWidth();
+                                        var h1 = 500;
+
+                                        $("#relationChart").width(w1);
+                                        $("#relationChart").height(h1);
+
+                                    });
+                                </script>
+
+                                <script type="text/javascript">
+                                    var domRelation = document.getElementById("relationChart");
+                                    var myChartRelation = echarts.init(domRelation);
+                                    var appRelation = {};
+
+                                    var dataAll = [];
+
+                                    var markLineOpt = {
+                                        animation: false,
+                                        label: {
+                                            normal: {
+                                                formatter: 'y = 0.5 * x + 3',
+                                                textStyle: {
+                                                    align: 'right'
+                                                }
+                                            }
+                                        },
+                                        lineStyle: {
+                                            normal: {
+                                                type: 'solid'
+                                            }
+                                        },
+                                        tooltip: {
+                                            formatter: 'y = 0.5 * x + 3'
+                                        },
+                                        data: [[{
+                                            coord: [0, 3],
+                                            symbol: 'none'
+    }, {
+                                            coord: [100, 65],
+                                            symbol: 'none'
+    }]]
+                                    };
+
+                                    optionRelation = {
+                                        title: {
+                                            text: 'Star-Fork Contribution',
+                                            x: 'center',
+                                            y: 0
+                                        },
+
+                                        tooltip: {
+                                            formatter: 'Group {a}: ({c})'
+                                        },
+                                        xAxis: [
+                                            {
+                                                gridIndex: 0,
+                                                min: 0,
+                                                max: 100
+                                            }
+        ],
+                                        yAxis: [
+                                            {
+                                                gridIndex: 0,
+                                                min: 0,
+                                                max: 100
+                                            }
+    ],
+                                        series: [
+                                            {
+                                                name: 'I',
+                                                type: 'scatter',
+                                                data: [],
+                                                
+                                                itemStyle:{
+                                                    normal:{
+                                                        color:'#26CC00'
+                                                    }
+                                                },
+                                                
+                                                markLine: markLineOpt
+        }
+    ]
+                                    };
+
+
+                                    myChartRelation.setOption(optionRelation);
+                                    myChartRelation.showLoading();
+
+
+                                    $.getJSON("/statTotalRepos/starRelated?item=fork", function (data) {
+                                        myChartRelation.hideLoading();
+                                        var list1Relation = [];
+                                        var list2Relation = [];
+                                        list2Relation = data["yData"];
+                                        list1Relation = data["xData"];
+
+
+                                        for (var index = 0; index < list1Relation.length; index++) {
+                                            var x = [list1Relation[index], list2Relation[index]];
+
+
+                                            dataAll.push(x);
+
+                                        }
+
+
+
+                                        setdataRelation({
+                                            data: dataAll
+                                        });
+                                    });
+
+
+
+                                    function setdataRelation(data) {
+                                        myChartRelation.setOption({
+
+                                            series: [
+                                                {
+                                                    name: 'I',
+                                                    data: data.data
+
+                                                }
+                                            ]
+                                        });
+                                    }
+                                </script>
+
+
+                            </div>
+                        </div>
+                            </div>
+                            
+                            <div class="item">
+                                                        <div class="col-md-12 column">
+                            <div class="relationSecondChartContainer">
+                                <div id="relationSecondChart"></div>
+
+                                <script type="text/javascript">
+                                    var w1 = $("#languageChartContainer").innerWidth();
+                                    //                                        var h1 = $("#repoRadar").innerWidth();
+                                    var h1 = 500;
+
+                                    $("#relationSecondChart").width(w1);
+                                    $("#relationSecondChart").height(h1);
+                                </script>
+
+
+                                <script type="text/javascript">
+                                    $(window).resize(function () {
+
+                                        var w1 = $("#languageChartContainer").innerWidth();
+                                        //                                        var h1 = $("#repoRadar").innerWidth();
+                                        var h1 = 500;
+
+                                        $("#relationSecondChart").width(w1);
+                                        $("#relationSecondChart").height(h1);
+
+                                    });
+                                </script>
+
+                                <script type="text/javascript">
+                                    var domSecondRelation = document.getElementById("relationSecondChart");
+                                    var myChartSecondRelation = echarts.init(domSecondRelation);
+                                    var appSecondRelation = {};
+
+                                    var dataSecondAll = [];
+
+                                    var markSecondLineOpt = {
+                                        animation: false,
+                                        label: {
+                                            normal: {
+                                                formatter: 'y = 0.5 * x + 3',
+                                                textStyle: {
+                                                    align: 'right'
+                                                }
+                                            }
+                                        },
+                                        lineStyle: {
+                                            normal: {
+                                                type: 'solid'
+                                            }
+                                        },
+                                        tooltip: {
+                                            formatter: 'y = 0.5 * x + 3'
+                                        },
+                                        data: [[{
+                                            coord: [0, 3],
+                                            symbol: 'none'
+    }, {
+                                            coord: [100, 80],
+                                            symbol: 'none'
+    }]]
+                                    };
+                                    
+
+                                    optionSecondRelation = {
+                                        title: {
+                                            text: 'Star-Contributor Contribution',
+                                            x: 'center',
+                                            y: 0
+                                        },
+
+                                        tooltip: {
+                                            formatter: 'Group {a}: ({c})'
+                                        },
+                                        xAxis: [
+                                            {
+                                                gridIndex: 0,
+                                                min: 0,
+                                                max: 100
+                                            }
+        ],
+                                        yAxis: [
+                                            {
+                                                gridIndex: 0,
+                                                min: 0,
+                                                max: 100
+                                            }
+    ],
+                                        series: [
+                                            {
+                                                name: 'I',
+                                                type: 'scatter',
+                                                data: [],
+                                                itemStyle:{
+                                                    normal:{
+                                                        color:'rgb(233,195,65)'
+                                                    }
+                                                },
+                                                markLine: markSecondLineOpt
+        }
+    ]
+                                    };
+
+
+                                    myChartSecondRelation.setOption(optionSecondRelation);
+                                    myChartSecondRelation.showLoading();
+
+
+                                    $.getJSON("/statTotalRepos/starRelated?item=contributor", function (data) {
+                                        myChartSecondRelation.hideLoading();
+                                        var list1SecondRelation = [];
+                                        var list2SecondRelation = [];
+                                        list2SecondRelation = data["yData"];
+                                        list1SecondRelation = data["xData"];
+
+
+                                        for (var index = 0; index < list1SecondRelation.length; index++) {
+                                            var x = [list1SecondRelation[index], list2SecondRelation[index]];
+
+
+                                            dataSecondAll.push(x);
+
+                                        }
+
+
+
+                                        setdataSecondRelation({
+                                            data: dataSecondAll
+                                        });
+                                    });
+
+
+
+                                    function setdataSecondRelation(data) {
+                                        myChartSecondRelation.setOption({
+
+                                            series: [
+                                                {
+                                                    name: 'I',
+                                                    data: data.data
+
+                                                }
+                                            ]
+                                        });
+                                    }
+                                </script>
+
+
+                            </div>
+                        </div>
+                            </div>
+                        
+                        </div>
+                        
+                        <a class="left carousel-control" href="#carousel-relation" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+
+                        <a class="right carousel-control" href="#carousel-relation" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+                        
+                    </div>
+                    
+                    
+                    
+                    
+                    <div class="row clearfix">
+
+                    </div>
+
+                    <div class="row clearfix">
+
+                    </div>
+
+
+
+
+
+                </div>
+
+                <div class="col-md-1 column">
+                </div>
+            </div>
+
+
+
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+         #include("footer.vm")
+
+        
+    </div>
+
+
+</body>
+
+</html>

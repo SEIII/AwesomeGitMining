@@ -1,0 +1,18 @@
+2016/2/29
+
+who:申彬 石若非 刘璇琳 生宸
+
+when:第一周
+
+what:第一次会议 内容如下：
+
+1. 大家愉快的确立的选题 为GitMining的数据挖掘和处理分析
+2. 大家愉快的学习了gitlab的commit和fetch操作 开始正式接触gitlab的运用
+3. 大家愉快的掌握了两种提交技巧  利用git gui和eclipse的插件
+4. 进行了maven项目的初步搭建 大家讨论了分层结构的分工
+5. 明确了团队章程  书写了项目启动文档
+
+
+how long:1.5h
+
+arrived solutions：学习会议内容 成功搭建项目 

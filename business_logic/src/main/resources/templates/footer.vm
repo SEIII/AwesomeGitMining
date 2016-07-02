@@ -1,0 +1,9 @@
+ <!-- Main Footer -->
+       <footer class="main-footer">
+            <!-- To the right -->
+            <div class="pull-right hidden-xs">
+               <strong>Fish Hunters</strong> 
+            </div>
+            <!-- Default to the left -->
+            Thanks for <a href="https://github.com/numbbbbb">numbbbbb</a> and <a href="https://githubcontributions.io/">githubcontributions.io</a>
+        </footer>

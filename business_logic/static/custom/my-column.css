@@ -1,0 +1,19 @@
+.my-column-left{
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 45px;
+}
+.my-column-right{
+  position: relative;
+  min-height: 1px;
+  padding-right: 45px;
+  padding-left: 15px;
+}
+
+.my-user-label {
+	width:110px;
+	margin-left: 10px;
+	font-size : 14px
+
+}

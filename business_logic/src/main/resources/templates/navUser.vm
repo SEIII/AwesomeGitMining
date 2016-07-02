@@ -1,0 +1,9 @@
+<li class="dropdown user user-menu">
+	<!-- Menu Toggle Button -->
+	<a href="/userDetail?login=${user.gitid}">
+		<!-- The user image in the navbar-->
+		<img src=$user.getAvatar_url() class="user-image" alt="User Image">
+		<!-- hidden-xs hides the username on small devices so only the image appears. -->
+		<span class="hidden-xs">$user.account</span>
+	</a>
+</li>

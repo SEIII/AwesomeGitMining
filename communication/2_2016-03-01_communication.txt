@@ -1,0 +1,7 @@
+who: 申彬 石若非 刘璇琳 生宸
+when:第二周
+what: 讨论了小组的分工情况
+      学习了java解析Web API传回的JSON格式解析方法
+      学习了java内嵌python的方法
+how long: 1.5h
+arrived solution： 学习了上述内容

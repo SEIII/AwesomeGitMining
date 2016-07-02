@@ -1,0 +1,10 @@
+package Application.common;
+
+public enum UserStatType {
+
+
+	FOLLOWER, FOLLOWING, CONTRIBUTED, YEAR, ACTIVITY, FAMOUS
+
+// CREATE_TIME, CREATED_REPOS, CONTRIBUTED_REPOS
+
+}

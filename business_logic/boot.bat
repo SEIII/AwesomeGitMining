@@ -1,0 +1,1 @@
+java -Dfile.encoding=UTF-8 -jar business_logic-1.1.jar

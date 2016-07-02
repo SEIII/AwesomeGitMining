@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+
+<head>
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+          page. However, you can choose any other skin. Make sure you
+          apply the skin class to the body tag so the changes take effect.
+    -->
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="../../plugins/iCheck/all.css">
+    <link rel="stylesheet" href="dist/css/skins/skin-blue.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+
+
+    <title>My-AweSome-GitMiNing</title>
+    <!-- jQuery 2.1.4 -->
+    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/app.min.js"></script>
+    
+
+    <script src="echarts.min.js"></script>
+
+    <!-- jQuery UI 1.11.4 -->
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+
+
+    <!-- jQuery Knob Chart -->
+    <script src="plugins/knob/jquery.knob.js"></script>
+    <!-- daterangepicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- datepicker -->
+    <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+    <!-- Bootstrap WYSIHTML5 -->
+    <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <!-- SlimScroll -->
+    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="plugins/fastclick/fastclick.min.js"></script>
+
+    
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
+    <!-- page script -->
+    <script>
+      $(function () {
+        $('#creat').DataTable({
+              "paging": true,
+              "lengthChange": false,
+              "searching": false,
+              "ordering": true,
+              "info": true,
+              "autoWidth": false
+        });
+        $('#contribute').DataTable({
+              "paging": true,
+              "lengthChange": false,
+              "searching": false,
+              "ordering": true,
+              "info": true,
+              "autoWidth": false
+        });
+        
+        if(gitMiningLogin === loginstr){
+      		$("#compareDiv").hide();
+      	}
+      });
+      
+      var chartTitleStyle = {
+      	fontFamily: "Microsoft YaHei",
+      	fontSize:17,
+      	fontStyle:"normal",
+      	fontWeight:"normal"
+      }
+      
+      var gitMiningLogin = "${user.gitid}";
+      var gitMiningUserRadar;
+      $.getJSON("/statSingleUser/radar",{login:gitMiningLogin},function(data){
+      	console.log(data);
+      	gitMiningUserRadar = data.yData;
+      });
+      
+      var loginstr = "${userinfo.login}";
+      
+      
+    </script>
+
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="dist/js/pages/dashboard.js"></script>
+
+    <script src="echarts.min.js"></script>
+
+    <!-- Optionally, you can add Slimscroll and FastClick plugins.
+         Both of these plugins are recommended to enhance the
+         user experience. Slimscroll is required when using the
+         fixed layout. -->
+    
+
+    
+    <script type="text/javascript">
+        
+
+    
+        function clickFollow(){
+            
+            $.post("/userFollow",
+                      {
+                account: "${user.account}",
+                userLogin: "${userinfo.login}",
+                followInfo: '{\
+                    "avatarUrl": "${userinfo.getAvatar_url()}",\
+                    "login": "${userinfo.getLogin()}",\
+                    "name": "${userinfo.getName()}",\
+                    "type": "${userinfo.getType()}",\
+                    "followers": ${userinfo.getFollowers()},\
+                    "publicRepos": ${userinfo.getPublic_repos()},\
+                    "created": "${userinfo.getCreatedDateString()}"\
+                }'
+                
+            }
+                      ,function(data){
+                alert(data);
+            });
+        }
+    
+    </script>
+</head>
+    
+    
+    
+<!--
+  BODY TAG OPTIONS:
+  =================
+  Apply one or more of the following classes to get the
+  desired effect
+  |---------------------------------------------------------|
+  | SKINS         | skin-blue                               |
+  |               | skin-black                              |
+  |               | skin-purple                             |
+  |               | skin-yellow                             |
+  |               | skin-red                                |
+  |               | skin-green                              |
+  |---------------------------------------------------------|
+  |LAYOUT OPTIONS | fixed                                   |
+  |               | layout-boxed                            |
+  |               | layout-top-nav                          |
+  |               | sidebar-collapse                        |
+  |               | sidebar-mini                            |
+  |---------------------------------------------------------|
+  -->
+<body class="hold-transition fixed skin-blue sidebar-mini">
+    
+    <div class="wrapper">
+
+        <!-- Main Header -->
+        <header class="main-header" id="mainheader">
+
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>G</b>IT</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg pull-left"><img src = "custompics/main.png"><b>Git</b> Mining</span>
+            </a>
+
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                       #parse("navUser.vm")
+                    </ul>
+                </div>
+                
+            </nav>
+            
+        </header>
+        
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src=$user.getAvatar_url() class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p>$user.account</p>
+                        <!-- Status -->
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                <ul class="sidebar-menu">
+						
+						<li class="active"><a a href="userDetail?login=$user.gitid"><i class="fa fa-github-alt"></i> <span>Detail</span></a></li>
+						<li><a href="/followCollection?account=$user.account"><i class="fa fa-star-o"></i> <span>Collection</span></a></li>
+						<li><a href="/watch?account=$user.account"><i class="fa fa-eye"></i> <span>Watch</span></a></li>
+						<li><a href="/home"><i class="fa fa-search"></i> <span>Search</span></a></li>
+
+						<li class="treeview">
+							<a href="#"><i class="fa fa-bar-chart"></i> <span>Statistics</span> <i class="fa fa-angle-left pull-right"></i></a>
+							<ul class="treeview-menu">
+								<li><a href="/userChartTest"><i class="fa fa-users"></i>User</a></li>
+								<li><a href="/repoChartTest"><i class="fa fa-book"></i>Repository</a></li>
+							</ul>
+						</li>
+
+				</ul>
+                <!-- /.sidebar-menu -->
+            </section>
+            <!-- /.sidebar -->
+            
+        </aside>
+        
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>User<small>Awesome User Info.</small></h1>
+                <br>
+                <br><!--丑陋的换行排版法-->
+                <ol class="breadcrumb">
+                    <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li class="active">User</li>
+                    <li class="active">$userinfo.login</li>
+                </ol>
+            </section>
+            
+            <!-- Main content -->
+            <div class="row clearfix">
+                
+                <div class="col-md-3 column">
+                    <div class="row clearfix">
+                        <div class="col-md-2 column"></div>
+                        <div class="col-md-10 column">
+                            
+                            <!-- Profile Image -->
+                            <div class="box box-primary">
+                                <div class="box-body box-profile">
+                                    <img class="profile-user-img img-responsive img-circle" src="$userinfo.avatar_url" alt="User profile picture">
+                                    <h3 class="profile-username text-center">$userinfo.name</h3>
+                                    <p class="text-muted text-center">$userinfo.login</p>
+                                    <ul class="list-group list-group-unbordered">
+                                        <li class="list-group-item">
+                                            <b>Followers</b> <a class="pull-right">$userinfo.getFollowers()</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Following</b> <a class="pull-right">$userinfo.following</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Repos</b> <a class="pull-right">$userinfo.getPublic_repos()</a>
+                                        </li>
+                                    </ul>
+                                    <a id="followBtn" onclick=clickFollow() class="btn btn-primary btn-block"><b>Follow</b></a>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            
+                            <!-- About Me Box -->
+                            <div class="box box-primary">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">About Me</h3>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body" style="padding-top:16px;padding-bottom:16px;height:360px">
+                                    <strong><i class="fa fa-envelope margin-r-5"></i>  E-mail</strong>
+                                    <p class="text-muted">
+                                        $userinfo.getEmail()
+                                    </p>
+                                    <hr>
+                                    <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+                                    <p class="text-muted">$userinfo.location</p>
+                                    <hr>
+                                    <strong><i class="fa fa-pencil margin-r-5"></i>Main Skill</strong>
+                                    <p>
+                                        <span class="label label-success" id="skill1">Python</span>
+                                        <span class="label label-info" id="skill2">Java</span>
+                                    </p>
+                                    <hr>
+                                    <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-9 column">
+                    <div class="row clearfix">
+                        <div class="col-md-11 column">
+                            
+                            <div class="tabbable" id="tabs-441144">
+
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#tab_stat" data-toggle="tab">
+                                        <i class="fa fa-pie-chart"></i>         Stat</a></li>
+                                    <li><a href="#tab_repo" data-toggle="tab"><i class="fa fa-rss">
+                                        </i>        Repos</a></li>
+                                </ul>
+                                
+                                <div class="tab-content">
+                                    
+                                    <div class="tab-pane active" id="tab_stat">
+                                        
+                                        <div class="row clearfix">
+                                            
+                                            <div class="col-md-6 column" id="userRadar">
+                                                <div id="radarContainer"></div>
+                                                
+                                                <script type="text/javascript">
+                                                    var w1 = $("#userRadar").innerWidth();
+                                                    var h1 = 350;
+                                                    $("#radarContainer").width(w1);
+                                                    $("#radarContainer").height(h1);
+                                                </script>
+                                                
+                                                <script type="text/javascript">
+                                                    $(window).resize(function(){
+                                                        var w1 = $("#userRadar").innerWidth();
+                                                        var h1 = 350;
+                                                        $("#radarContainer").width(w1);
+                                                        $("#radarContainer").height(h1);
+                                                    });
+                                                </script>
+                                                
+                                                <script>
+                                                    var user_radar = echarts.init(document.getElementById('radarContainer'));
+                                                    option = {
+                                                        title: {
+                                                            text: ''
+                                                        },
+                                                        tooltip: {},
+                                                        legend: {
+                                                            data: ['']
+                                                        },
+                                                        radar: {
+                                                            // shape: 'circle',
+                                                            indicator: [
+                                                                {
+                                                                    name: 'Creative',
+                                                                    max: 10
+                                                                },
+                                                                {
+                                                                    name: 'Geak',
+                                                                    max: 10
+                                                                },
+                                                                {
+                                                                    name: 'Hot',
+                                                                    max: 10
+                                                                },
+                                                                {
+                                                                    name: 'Variety',
+                                                                    max: 10
+                                                                },
+                                                                {
+                                                                    name: 'Core',
+                                                                    max: 10
+                                                                },
+                                                                {
+                                                                    name: 'Activity',
+                                                                    max: 10
+                                                                }
+                                                            ]
+                                                        },
+                                                        series: [{
+                                                            name: 'userinfo',
+                                                            type: 'radar',
+                                                            data: [
+                                                                {
+                                                                    value: [0, 0, 0, 0, 0, 0],
+                                                                    name: 'my_info'
+                                                                }
+                                                            ]
+                                                        }]
+                                                    };
+                                                    user_radar.setOption(option);
+                                                    user_radar.showLoading();
+                                                    
+                                                    var list1 = [];
+                                                    
+                                                    $.getJSON("/statSingleUser/radar",{login:loginstr},function (data) {
+                                                        user_radar.hideLoading();
+                                                        
+                                                        list1 = data["yData"];
+                                                        for(var i=0;i<list1.length;i++){
+                                                            list1[i] = list1[i].toFixed(2);
+                                                        }
+
+                                                        $("#creativeValue").data("targetValue", list1[0]);
+                                                        $("#geakValue").data("targetValue", list1[1]);
+                                                        $("#hotValue").data("targetValue", list1[2]);
+                                                        $("#varietyValue").data("targetValue", list1[3]);
+                                                        $("#coreValue").data("targetValue", list1[4]);
+                                                        $("#activityValue").data("targetValue", list1[5]);
+
+                                                        $('.knob').each(function () { //each .knob
+                                                            $(this).animate({ //animate to data targetValue
+                                                                value: $(this).data('targetValue') * 10
+                                                            }, {
+                                                                duration: 1000,
+                                                                easing: 'swing',
+                                                                progress: function () {
+                                                                    $(this).val(Math.round(this.value)).trigger('change')
+                                                                }
+                                                            });
+                                                        });
+
+                                                        setData(list1);
+                                                    });
+                                                    
+                                                    function setData(data) {
+
+                                                        user_radar.setOption({
+                                                            series: [{
+
+                                                                name: 'userinfo',
+                                                                type: 'radar',
+                                                                data: [
+                                                                    {
+                                                                        value: data,
+                                                                        name: 'my_info'
+                                                                }
+                                                            ]
+                                                        }]
+                                                        });
+                                                    }
+                                                    
+                                                    $(window).resize(function () {
+                                                        $(user_radar).resize();
+                                                    })
+                                                    
+                                                </script>
+                                                
+                                            </div>
+                                            
+                                            <div class="col-md-6 column" style="padding-left:30px">
+                                                
+                                                <br>
+                                                <br>
+                                                <!-- solid sales graph -->
+                                                <div class="box box-solid bg-teal-gradient">
+                                                    <div class="box-footer no-border">
+                                                        <div class="row">
+                                                            <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                                                                <input id="creativeValue" type="text" class="knob"  data-readonly="true" value="30" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                                                                <div class="knob-label">Creative</div>
+                                                            </div>
+                                                            <!-- ./col -->
+                                                            <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                                                                <input id="varietyValue" type="text" class="knob" data-readonly="true" value="40" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                                                                <div class="knob-label">Variety</div>
+                                                            </div>
+                                                            <!-- ./col -->
+                                                            <div class="col-xs-4 text-center">
+                                                                <input id="geakValue" type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                                                                <div class="knob-label">Geak</div>
+                                                            </div>
+                                                            <!-- ./col -->
+                                                        </div>
+                                                        <!-- /.row -->
+                                                    </div>
+                                                    <!-- /.box-footer -->
+                                                </div>
+                                                <!-- /.box -->
+
+                                                
+                                                <!-- solid sales graph -->
+                                                <div class="box box-solid bg-teal-gradient">
+                                                    <div class="box-footer no-border">
+                                                        <div class="row">
+                                                            <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                                                                <input id="coreValue" type="text" class="knob" data-readonly="true" value="60" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                                                                <div class="knob-label">Core</div>
+                                                            </div>
+                                                            <!-- ./col -->
+                                                            <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                                                                <input id="activityValue" type="text" class="knob" data-readonly="true" value="70" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                                                                <div class="knob-label">Activity</div>
+                                                            </div>
+                                                            <!-- ./col -->
+                                                            <div class="col-xs-4 text-center">
+                                                                <input id="hotValue" type="text" class="knob" data-readonly="true" value="80" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                                                                <div class="knob-label">Hot</div>
+                                                            </div>
+                                                            <!-- ./col -->
+                                                        </div>
+                                                        <!-- /.row -->
+                                                    </div>
+                                                    <!-- /.box-footer -->
+                                                </div>
+                                                <!-- /.box -->
+                                                
+                                                <div id = "compareDiv" class="form-group" style="margin-left:10px">
+                                                    <label>
+                                                        <input type="checkbox" class="icheckbox_flat-blue" style="margin-top:-2px" onclick="compare()">
+                                                        <span style="font-size:17px;font-weight:500">Compare  stat   with  me</span>
+                                                    </label>
+                                                </div>
+                                                
+                                                <script>
+                                                
+                                                    var is_cmp_select = false;
+                                                    
+                                                    function compare(){
+                                                        if(is_cmp_select==false){
+                                                            is_cmp_select = true;
+                                                            option = {
+                                                               
+                                                                series: [{
+                                                                    name: 'userinfo',
+                                                                    type: 'radar',
+                                                                    data: [
+                                                                        {
+                                                                            value: list1,
+                                                                            name: 'my_info'
+                                                                        },
+                                                                        {
+                                                                            value: gitMiningUserRadar,
+                                                                            name: 'info'
+                                                                        }
+                                                                    ]
+                                                                }]
+                                                            };
+                                                            user_radar.setOption(option);
+                                                        }
+                                                        else{
+                                                            is_cmp_select = false;
+                                                            option = {
+                                                                
+                                                                series: [{
+                                                                    name: 'userinfo',
+                                                                    type: 'radar',
+                                                                    data: [
+                                                                        {
+                                                                            value: list1,
+                                                                            name: 'my_info'
+                                                                        }
+                                                                    ]
+                                                                }]
+                                                            };
+                                                            user_radar.setOption(option);
+                                                        }
+                                                    }
+                                                </script>
+                                                
+                                            </div>
+                                            
+                                        </div>     
+                                        
+                                        <br>
+                                        
+                                        <div class="row clearfix">
+                                            
+                                            <div class="col-md-6 column" style="padding-top:50px">
+                                                
+                                                <div class="callout" style="background-color:#ffffff;border-left:4px solid #eee;border-color:#0097bc;padding-top:20px;padding-bottom:20px;margin-bottom:20px">
+                                                    
+                                                    <p style="padding-left:20px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8">经过 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:500;font-size:24px;opacity:1" id="contrinum"> 153 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8"> 次提交</span>
+                                                    </p>
+                                                    
+                                                    <p style="padding-left:35px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8">你的仓库共创造了 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:500;font-size:24px;opacity:1" id="totalvalue"> ¥800 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8"> 的价值</span>
+                                                    </p>
+                                                    
+                                                    <p style="padding-left:50px;padding-top:10px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8" id="totalvaluestr">这可以在希尔顿大酒店住一晚XD</span>
+                                                    </p>
+                                                    
+                                                </div>
+                                                
+                                                <div class="callout" style="background-color:#ffffff;border-left:4px solid #eee;border-color:#00a65a;padding-top:20px;padding-bottom:20px;margin-bottom:20px">
+                                                    
+                                                    <p style="padding-left:20px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8">共有 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:500;font-size:24px;opacity:1" id="languagenum"> 7 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8"> 种语言出现在了你的仓库中</span>
+                                                    </p>
+                                                    
+                                                    <p style="padding-left:35px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8">其中 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:500;font-size:24px;opacity:1" id="mostcodelanguage"> HTML </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8"> 成为了主角</span>    
+                                                    </p>
+                                                    
+                                                    <p style="padding-left:50px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:14px;opacity:0.8">占总代码量的 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:18px;opacity:1" id="mostcodelanguagepercent"> 60% </span>
+                                                    </p>
+                                                    
+                                                </div>
+                                                    
+                                                </div>
+                                            
+                                            <div class="col-md-6 column" id="languageLine">
+                                                
+                                                <div id="lineContainer"></div>
+                                                
+                                                <script type="text/javascript">
+                                                    var w2 = $("#languageLine").innerWidth()-10;
+                                                    var h2 = 400;
+                                                    $("#lineContainer").width(w2);
+                                                    $("#lineContainer").height(h2);
+                                                </script>
+                                                
+                                                <script type="text/javascript">
+                                                    $(window).resize(function(){
+                                                        var w2 = $("#languageLine").innerWidth()-10;
+                                                        var h2 = 400;
+                                                        $("#lineContainer").width(w2);
+                                                        $("#lineContainer").height(h2);
+                                                    });
+                                                </script>
+                                                
+                                                <script>
+                                                    var user_line = echarts.init(document.getElementById('lineContainer'));
+                                                    option = {
+                                                        title: {
+                                                            text: '代码价值',
+                                                            textStyle : chartTitleStyle,
+                                                            x:'center'
+                                                        },
+                                                        tooltip : {
+                                                            trigger: 'axis',
+                                                            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                                                                type : 'shadow'        // 默认为直线，可选为：'line' | 
+                                                            },
+                                                            formatter: '{b1} :   ¥{c1}'
+                                                        },
+                                                        toolbox: {
+                                                            feature: {
+                                                                magicType: {
+                                                                    type: ['stack', 'tiled']
+                                                                },
+                                                                dataView: {},
+                                                                saveAsImage: {
+                                                                    pixelRatio: 2
+                                                                }
+                                                            }
+                                                        },
+                                                        grid: {
+                                                            left: '3%',
+                                                            right: '4%',
+                                                            bottom: '3%',
+                                                            containLabel: true
+                                                        },
+                                                        xAxis: {
+                                                            type : 'category',
+                                                            splitLine: {show:false},
+                                                            data : ['Total','Java','C++','Html','C#','Ruby','Javascript','Python']
+                                                        },
+                                                        yAxis: {
+                                                            type : 'value',
+                                                            min : 0
+                                                        },
+                                                        series: [
+                                                            {
+                                                                name: '辅助',
+                                                                type: 'bar',
+                                                                stack:  'sum',
+                                                                itemStyle: {
+                                                                    normal: {
+                                                                        barBorderColor: 'rgba(0,0,0,0)',
+                                                                        color: 'rgba(0,0,0,0)'
+                                                                    },
+                                                                    emphasis: {
+                                                                        barBorderColor: 'rgba(0,0,0,0)',
+                                                                        color: 'rgba(0,0,0,0)'
+                                                                    }
+                                                                },
+                                                                data: [0, 2100, 1800, 1600, 700, 400, 300, 0]
+                                                            },
+                                                            {
+                                                                name: '价值',
+                                                                type: 'bar',
+                                                                stack: 'sum',
+                                                                label: {
+                                                                    normal: {
+                                                                        show: true,
+                                                                        position: 'inside'
+                                                                    }
+                                                                },
+                                                                itemStyle: {
+                                                                    normal: {
+                                                                        barBorderColor: 'rgba(70,130,180,0.8)',
+                                                                        color: 'rgba(70,130,180,0.8)'
+                                                                    },
+                                                                    emphasis: {
+                                                                        barBorderColor: 'rgba(70,130,180,0.8)',
+                                                                        color: 'rgba(70,130,180,0.8)'
+                                                                    }
+                                                                },
+                                                                data:[2900, 800, 300, 200, 900, 300, 100, 300]
+                                                            }
+                                                        ]
+                                                    };
+                                                    user_line.setOption(option);
+                                                    user_line.showLoading();
+                                                    
+                                                    $.getJSON("/statSingleUser/codeValue",{login:loginstr},function (data) {
+                                                        
+                                                        user_line.hideLoading();
+                                                        var list2 = [];
+                                                        list2 = data["yData"];
+                                                        var totalValue = 0;
+                                                        for(var i=0;i<list2.length;i++){
+                                                            totalValue += list2[i];
+                                                        }
+                                                        totalValue = Math.round(totalValue);
+                                                        
+                                                        var line_list_above = new Array();
+                                                        var line_list_below = new Array();
+                                                        line_list_above[0] = totalValue;
+                                                        line_list_below[0] = 0;
+                                                        
+                                                        var tmp_total = totalValue;
+                                                        for(var i=1;i<=list2.length;i++){
+                                                            line_list_above[i] = Math.round(list2[i-1]);
+                                                            line_list_below[i] = tmp_total-Math.round(list2[i-1]);
+                                                            tmp_total -= list2[i-1];
+                                                        }
+                                                    
+                                                        var language_line_x = [];
+                                                        language_line_x = data["xData"];
+                                                        language_line_x.unshift("Total");
+                                                        setLineData(language_line_x,line_list_above,line_list_below);
+                                                        
+                                                        var languagePercent = (data.other.percent*100).toFixed(2);
+                                                        console.log("language percent:"+languagePercent);
+                                                        
+                                                        $("#mostvaluelanguage").html(data.other.language);
+                                                        $("#languagemostvaluepercent").html(languagePercent+"%");
+                                                        $("#mostlanguagevalue").html("¥"+Math.round(data.other.value));
+                                                        
+                                                        $("#skill1").html(data.other.language);
+                                                        
+                                                        if(language_line_x.length>=3){
+                                                        	console.log(language_line_x[3]);
+                                                        	$("#skill2").html(language_line_x[3]);
+                                                        }else{
+                                                        	$("#skill2").hide();
+                                                        }
+                                                        
+                                                        
+                                                        
+                                                    });
+                                                    
+                                                    function setLineData(xdata,y_above,y_below) {
+
+                                                        user_line.setOption({
+                                                            xAxis: {
+                                                                type : 'category',
+                                                                splitLine: {show:false},
+                                                                data : xdata
+                                                            },
+                                                                series: [
+                                                                    {
+                                                                    name: '辅助',
+                                                                    type: 'bar',
+                                                                    stack:  'sum',
+                                                                    itemStyle: {
+                                                                        normal: {
+                                                                            barBorderColor: 'rgba(0,0,0,0)',
+                                                                            color: 'rgba(0,0,0,0)'
+                                                                        },
+                                                                        emphasis: {
+                                                                            barBorderColor: 'rgba(0,0,0,0)',
+                                                                            color: 'rgba(0,0,0,0)'
+                                                                        }
+                                                                    },
+                                                                    data: y_below
+                                                                },
+                                                                {
+                                                                name: '价值',
+                                                                type: 'bar',
+                                                                stack: 'sum',
+                                                                label: {
+                                                                    normal: {
+                                                                        show: true,
+                                                                        position: 'inside'
+                                                                    }
+                                                                },
+                                                                itemStyle: {
+                                                                    normal: {
+                                                                        barBorderColor: 'rgba(70,130,180,0.8)',
+                                                                        color: 'rgba(70,130,180,0.8)'
+                                                                    },
+                                                                    emphasis: {
+                                                                        barBorderColor: 'rgba(70,130,180,0.8)',
+                                                                        color: 'rgba(70,130,180,0.8)'
+                                                                    }
+                                                                },
+                                                                data: y_above
+                                                            }
+                                                            ]
+                                                        });
+
+                                                    }
+                                                    
+                                                    $(window).resize(function () {
+                                                        $(user_line).resize();
+                                                    })
+                                                    
+                                                </script>
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                        <br>
+                                        
+                                        <div class="row clearfix" style="padding-bottom:20px;padding-top:20px">
+                                            
+                                            <div class="col-md-6 column" id="languageRose" style="padding-top:0px">
+                                                
+                                                <div id="roseContainer"></div>
+                                                
+                                                <script type="text/javascript">
+                                                    var w3 = $("#languageRose").innerWidth();
+                                                    var h3 = 370;
+                                                    $("#roseContainer").width(w3);
+                                                    $("#roseContainer").height(h3);
+                                                </script>
+                                                
+                                                <script type="text/javascript">
+                                                    $(window).resize(function(){
+                                                        var w3 = $("#languageRose").innerWidth();
+                                                        var h3 = 370;
+                                                        $("#roseContainer").width(w3);
+                                                        $("#roseContainer").height(h3);
+                                                    });
+                                                </script>
+                                                
+                                                <script>
+                                                	var list3 = [];
+                                                    var list4 = [];
+                                                
+                                                    var language_rose = echarts.init(document.getElementById('roseContainer'));
+                                                    option = {
+                                                        title : {
+                                                            text: '代码量',
+                                                            x:'center',
+                                                            textStyle: chartTitleStyle
+                                                        },
+                                                        tooltip : {
+                                                            trigger: 'item',
+                                                            formatter: function(params){
+                                                            	var index = params["dataIndex"];
+                                                            	var yValue = list4[index];
+                                                            	
+                                                            	if(yValue>1024){
+                                                            		yValue /= 1024;
+                                                            		return params["name"]+" : "+parseInt(yValue)+" KB";
+                                                            	}
+                                                            	
+                                                            	if(yValue>1024*1024){
+                                                            		yValue /= 1024*1024;
+                                                            		return params["name"]+" : "+parseInt(yValue)+" MB";
+                                                            	}
+                                                            	
+                                                            	return params["name"]+" : "+yValue+" B";
+                                                            }
+                                                        },
+                                                        legend: {
+                                                            x : 'center',
+                                                            y : 'bottom',
+                                                            data:['rose1','rose2','rose3','rose4','rose5','rose6','rose7']
+                                                        },
+                                                        calculable : true,
+                                                        series : [
+                                                            {
+                                                                name:'面积模式',
+                                                                type:'pie',
+                                                                radius : [30, 110],
+                                                                center : ['50%', 150],
+                                                                roseType : 'area',
+                                                                data:[
+                                                                    {value:10, name:'rose1'},
+                                                                    {value:5, name:'rose2'},
+                                                                    {value:15, name:'rose3'},
+                                                                    {value:25, name:'rose4'},
+                                                                    {value:20, name:'rose5'},
+                                                                    {value:35, name:'rose6'},
+                                                                    {value:30, name:'rose7'}
+                                                                ]
+                                                            }
+                                                        ]
+                                                    };
+                                                    language_rose.setOption(option);
+                                                    language_rose.showLoading();
+                                                    
+                                                    
+                                                    
+                                                    $.getJSON("/statSingleUser/code",{login:loginstr},function (data) {
+                                                        
+                                                        language_rose.hideLoading();
+                                                        
+                                                        list3 = data["xData"];
+                                                        
+                                                        list4 = data["yData"];
+                                                        
+                                                        var language_rose_list = new Array();
+                                                        for(var i=0;i<list3.length;i++){
+                                                            language_rose_list[i] = {value:(Math.log(list4[i])).toFixed(3), name:list3[i]};
+                                                        }
+                                                        
+                                                        setLanguageRoseData(language_rose_list,list3);
+                                                        
+                                                        $("#languagenum").html(data.other.languageNum);
+                                                        $("#mostcodelanguage").html(data.other.language); $("#mostcodelanguagepercent")
+                                                        		.html((data.other.percent*100).toFixed(2)+"%");
+                                                        
+                                                        $("#codesize").html(data.other.total+"k");
+                                                        $("#codesizestr").html("相当于 "+data.other.message);
+                                                        
+                                                    });
+                                                    
+                                                    function setLanguageRoseData(map,namelist){
+                                                        language_rose.setOption({
+                                                            legend: {
+                                                            x : 'center',
+                                                            y : 'bottom',
+                                                            data : namelist
+                                                            },
+                                                            series : [
+                                                            {
+                                                                name : '面积模式',
+                                                                type : 'pie',
+                                                                radius : [30, 110],
+                                                                center : ['50%', 150],
+                                                                roseType : 'area',
+                                                                data : map
+                                                            }
+                                                            ]
+                                                        });
+                                                    }
+                                                    
+                                                    $(window).resize(function () {
+                                                        $(language_rose).resize();
+                                                    })
+                                                    
+                                                </script>
+                                                
+                                            </div>
+                                            
+                                            <div class="col-md-6 column" style="padding-left:45px;padding-right:0px">
+                                                
+                                                <div class="callout" style="background-color:#ffffff;border-left:4px solid #eee;border-color:#f39c12;padding-top:30px;padding-bottom:30px;margin-bottom:20px">
+                                                    
+                                                    <p style="padding-left:20px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8">你创造价值最多的语言是 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:500;font-size:24px;opacity:1" id="mostvaluelanguage"> Java </span>
+                                                    </p>
+                                                    
+                                                    
+                                                    <p style="padding-left:35px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:14px;opacity:0.8">这个语言为你带来了  </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:18px;opacity:1;margin-top:9px;margin-bottom:9px" id="mostlanguagevalue"> ¥680 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:14px;opacity:0.8"> 的价值</span>
+                                                    </p>
+                                                    
+                                                    <p style="padding-left:50px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:14px;opacity:0.8">占总价值的 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:18px;opacity:1" id="languagemostvaluepercent"> 85% </span>
+                                                    </p>
+                                                    
+                                                </div>
+                                                
+                                                <div class="callout" style="background-color:#ffffff;border-left:4px solid #eee;border-color:#dd4b39;padding-top:30px;padding-bottom:30px;margin-bottom:20px">
+                                                    
+                                                    <p style="padding-left:20px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8">你创造价值最多的仓库是 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:500;font-size:20px;opacity:1" id="mostvaluerepo"> AGravity </span>
+                                                    </p>
+                                                    
+                                                    
+                                                    <p style="padding-left:35px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:14px;opacity:0.8">这个仓库为你带来了约  </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:18px;opacity:1;margin-top:9px;margin-bottom:9px" id="mostrepovalue"> ¥400 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:14px;opacity:0.8"> 的价值</span>
+                                                    </p>
+                                                    
+                                                    <p style="padding-left:50px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:14px;opacity:0.8">占总价值的 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:18px;opacity:1" id="mostvaluerepopercent"> 50% </span>
+                                                    </p>
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                
+                                        </div>
+                                        
+                                        <br>
+                                        
+                                        <div class="row clearfix">
+                                            
+                                            <div class="col-md-6 column">
+                                            
+                                                <div class="callout" style="background-color:#ffffff;border-left:4px solid #eee;border-color:#0097bc;padding-top:30px;padding-bottom:30px;margin-bottom:20px">
+                                                    
+                                                    <p style="padding-left:20px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8">你生产力最高的仓库是 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:500;font-size:20px;opacity:1" id="mostproductiverepo"> CSEⅢ </span>
+                                                    </p>
+                                                    
+                                                    <p style="padding-left:50px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:14px;opacity:0.8">完成了相当于 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:18px;opacity:1" id="productive"> 3 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:14px;opacity:0.8"> 个人的工作</span> 
+                                                    </p>
+                                                
+                                                </div>
+                                                
+                                                <div class="callout" style="background-color:#ffffff;border-left:4px solid #eee;border-color:#00a65a;padding-top:30px;padding-bottom:30px;margin-bottom:20px">
+                                                    
+                                                    <p style="padding-left:20px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:500;font-size:24px;opacity:1" id="year"> 3 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8"> 年 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:500;font-size:24px;opacity:1" id="month"> 3 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8"> 个月里 </span>
+                                                    </p>
+                                                    
+                                                    <p style="padding-left:35px">
+                                                    	<span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8"> 你共上传了</span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:500;font-size:24px;opacity:1" id="codesize"> 1233k </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8"> 字节代码</span>
+                                                    </p>
+                                                    
+                                                    <p style="padding-left:50px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:17px;opacity:0.8" id="codesizestr">相当于完成了一个linux操作系统XD</span>
+                                                    </p>
+                                                    
+                                                </div>
+                                            
+                                            </div>
+                                            
+                                            <div class="col-md-6 column" id="repoRose" style="padding-right:0px">
+                                                
+                                                <div id="repoRoseContainer"></div>
+                                                
+                                                <script type="text/javascript">
+                                                    var w4 = $("#languageRose").innerWidth();
+                                                    var h4 = 350;
+                                                    $("#repoRoseContainer").width(w4);
+                                                    $("#repoRoseContainer").height(h4);
+                                                </script>
+                                                
+                                                <script type="text/javascript">
+                                                    $(window).resize(function(){
+                                                        var w4 = $("#languageRose").innerWidth();
+                                                        var h4 = 350;
+                                                        $("#repoRoseContainer").width(w4);
+                                                        $("#repoRoseContainer").height(h4);
+                                                    });
+                                                </script>
+                                                
+                                                <script>
+                                                    var repo_rose = echarts.init(document.getElementById('repoRoseContainer'));
+                                                    
+                                                    var list5 = [];
+                                                    var list6 = [];
+                                                    
+                                                    option = {
+                                                        title : {
+                                                            text: '贡献分布',
+                                                            x:'center',
+                                                            textStyle:chartTitleStyle
+                                                        },
+                                                        tooltip : {
+                                                            trigger: 'item',
+                                                            formatter: function(params){
+                                                            	var index = params["dataIndex"];
+                                                            	var yValue = list6[index];
+                                                            	
+                                                            	return "对"+params["name"]+"贡献过"+yValue+"次";
+                                                            }
+                                                        },
+                                                        calculable : true,
+                                                        series : [
+                                                            {
+                                                                name:'半径模式',
+                                                                type:'pie',
+                                                                radius : [25, 110],
+                                                                center : ['55%', 150],
+                                                                roseType : 'radius',
+                                                                label: {
+                                                                    normal: {
+                                                                        show: true
+                                                                    },
+                                                                    emphasis: {
+                                                                        show: true
+                                                                    }
+                                                                },
+                                                                lableLine: {
+                                                                    normal: {
+                                                                        show: false,
+                                                                    },
+                                                                    emphasis: {
+                                                                        show: false
+                                                                    }
+                                                                },
+                                                                data:[
+                                                                    {value:10, name:'rose1'},
+                                                                    {value:5, name:'rose2'},
+                                                                    {value:15, name:'rose3'},
+                                                                    {value:25, name:'rose4'},
+                                                                    {value:20, name:'rose5'},
+                                                                    {value:35, name:'rose6'},
+                                                                    {value:30, name:'rose7'},
+                                                                    {value:40, name:'rose8'}
+                                                                ]
+                                                            }
+                                                        ]
+                                                    };
+                                                    repo_rose.setOption(option);
+                                                    repo_rose.showLoading();
+                                                    
+                                                    
+                                                    
+                                                    $.getJSON("/statSingleUser/contributionPie",{login:loginstr},function (data) {
+                                                        
+                                                        repo_rose.hideLoading();
+                                                        
+                                                        list5 = data["xData"];
+
+                                                        list6 = data["yData"];
+                                                        
+                                                        for(var i=0;i<list5.length;i++){
+                                                            var j = 0;
+                                                            for(j=0;j<list5[i].length;j++){
+                                                                if(list5[i][j]=='/')
+                                                                    break;
+                                                            }
+                                                            list5[i] = list5[i].substring(j+1,list5[i].length);
+                                                        }
+                                                        
+                                                        var repo_rose_list = new Array();
+                                                        for(var i=0;i<list5.length;i++){
+                                                            repo_rose_list[i] = {value:(Math.log(list6[i]+1.1)).toFixed(2), name:list5[i]};
+                                                        }
+                                                        
+                                                        setRepoRoseData(repo_rose_list,list5);
+                                                        
+                                                        $("#contrinum").html(data.other.total);
+                                                        
+                                                    });
+                                                    
+                                                    $.getJSON("/statSingleUser/age",{login:loginstr},function(data){
+                                                        $("#year").html(data.year);
+                                                        $("#month").html(data.month);
+                                                    })
+                                                    
+                                                    function setRepoRoseData(map,xlist){
+                                                        repo_rose.setOption({
+                                                            series : [
+                                                            {
+                                                                name:'半径模式',
+                                                                type:'pie',
+                                                                radius : [35, 110],
+                                                                center : ['50%', 150],
+                                                                roseType : 'radius',
+                                                                label: {
+                                                                    normal: {
+                                                                        show: true,
+                                                                        position: 'outside'
+                                                                    },
+                                                                    emphasis: {
+                                                                        show: false
+                                                                    }
+                                                                },
+                                                                lableLine: {
+                                                                    normal: {
+                                                                        show: false
+                                                                    },
+                                                                    emphasis: {
+                                                                        show: false
+                                                                    }
+                                                                },
+                                                                data: map
+                                                            }
+                                                        ]
+                                                        });
+                                                    }
+                                                    
+                                                    $(window).resize(function () {
+                                                        $(repo_rose).resize();
+                                                    })
+                                                    
+                                                </script>
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                        <br>
+                                        
+                                        <div class="row clearfix" style="margin-top:0px;margin-bottom:20px">
+                                            
+                                            <div class="col-md-12 column" id="repoBar">
+                                                
+                                                <div id="repoBarContainer"></div>
+                                                
+                                                <script type="text/javascript">
+                                                    var w5 = $("#repoBar").innerWidth();
+                                                    var h5 = 350;
+                                                    $("#repoBarContainer").width(w5);
+                                                    $("#repoBarContainer").height(h5);
+                                                </script>
+                                                
+                                                <script type="text/javascript">
+                                                    $(window).resize(function(){
+                                                        var w5 = $("#repoBar").innerWidth();
+                                                        var h5 = 350;
+                                                        $("#repoBarContainer").width(w5);
+                                                        $("#repoBarContainer").height(h5);
+                                                    });
+                                                </script>
+                                                
+                                                <script>
+                                                    var repo_bar = echarts.init(document.getElementById('repoBarContainer'));
+                                                   
+                                                   var list8 = [];
+                                                   var list9 = [];
+                                                   
+                                                   option = {
+                                                        title : {
+                                                            text: '',
+                                                        },
+                                                        tooltip :{ 
+                                                        	formatter: function(params){
+                                                        	
+                                                            	var index = params["dataIndex"];
+                                                            	var name = params["name"];
+                                                            	
+                                                            	var product = list8[index];
+                                                            	var value = parseInt(list9[index]);
+                                                            	
+                                                            	
+                                                            	return "在"+name+"中<br/>"
+                                                            			+"完成了"+product+"个人的工作"
+                                                            			+"<br/>"
+                                                            			+"创造了¥"+value+"的价值";
+                                                            }
+                                                        },
+                                                        legend: {
+                                                            data:['生产力','价值']
+                                                        },
+                                                        toolbox: {
+                                                            show : true,
+                                                            feature : {
+                                                                dataView : {show: true, readOnly: false},
+                                                                magicType : {show: true, type: ['line', 'bar']},
+                                                                restore : {show: true},
+                                                                saveAsImage : {show: true}
+                                                            }
+                                                        },
+                                                        calculable : true,
+                                                        grid: {
+                                                            left: '0%',
+                                                            right: '4%',
+                                                            bottom: '3%',
+                                                            containLabel: true
+                                                        },
+                                                        xAxis : [
+                                                            {
+                                                                type : 'category',
+                                                                data : ['R1','R2','R3','R4','R5','R6','R7','R8','R9','R10','R11','R12']
+                                                            }
+                                                        ],
+                                                        yAxis : [
+                                                            {
+                                                                type : 'value',
+                                                                scale: true,
+                                                                name: '生产力'
+                                                            },
+                                                            {
+                                                                type : 'value',
+                                                                scale: true,
+                                                                name: '价值'
+                                                            }
+                                                        ],
+                                                        series : [
+                                                            {
+                                                                name:'生产力',
+                                                                type:'bar',
+                                                                data:[0.2, 0.9, 0.7, 0.2, 0.6, 0.7, 0.6, 0.2, 0.6, 0.8, 0.4, 0.3],
+                                                                markLine : {
+                                                                    data : [
+                                                                        {type : 'average', name: '平均值'}
+                                                                    ]
+                                                                }
+                                                            },
+                                                            {
+                                                                name:'价值',
+                                                                type:'bar',
+                                                                yAxisIndex: 1,
+                                                                data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+                                                                markLine : {
+                                                                    data : [
+                                                                        {type : 'average', name : '平均值'}
+                                                                    ]
+                                                                }
+                                                            }
+                                                        ]
+                                                    };
+                                                    repo_bar.setOption(option);
+                                                    repo_bar.showLoading();
+                                                    var countload = 0;
+                                                    
+                                                    $.getJSON("/statSingleUser/productive",{login:loginstr},function (data) {
+                                                        
+                                                        if(countload==1){
+                                                            repo_bar.hideLoading();
+                                                        }
+                                                        else{
+                                                            countload = 1;
+                                                        }
+                                                        
+                                                        var list7 = [];
+                                                        list7 = data["xData"];
+                                                        
+                                                        list8 = data["yData"];
+                                            
+                                                        
+                                                        for(var i=0;i<list7.length;i++){
+                                                            var j = 0;
+                                                            for(j=0;j<list7[i].length;j++){
+                                                                if(list7[i][j]=='/')
+                                                                    break;
+                                                            }
+                                                            list7[i] = list7[i].substring(j+1,list7[i].length);
+                                                        }
+                                                        
+                                                        for(var i=0;i<list8.length;i++){
+                                                            list8[i] = list8[i].toFixed(2);
+                                                        }
+                                                        
+                                                        repo_bar.setOption({
+                                                            xAxis : [
+                                                            {
+                                                                type : 'category',
+                                                                data : list7
+                                                            }
+                                                        ],
+                                                            series : [
+                                                            {
+                                                                name:'生产力',
+                                                                type:'bar',
+                                                                data:list8,
+                                                                markLine : {
+                                                                    data : [
+                                                                        {type : 'average', name: '平均值'}
+                                                                    ]
+                                                                }
+                                                            }
+                                                            ]
+                                                        });
+                                                        
+                                                        var reponame = data.other.repo;
+                                                        var i;
+                                                        for(i=0;i<reponame.length;i++){
+                                                            if(reponame[i]=='/')
+                                                                break;
+                                                        }
+                                                        reponame = reponame.substring(i+1,reponame.length);
+                                                        $("#mostproductiverepo").html(reponame);
+                                                        $("#productive").html(data.other.value);
+                                                        
+                                                    });
+                                                    
+                                                    $.getJSON("/statSingleUser/value",{login:loginstr},function (data) {
+                                                        
+                                                        if(countload==1){
+                                                            repo_bar.hideLoading();
+                                                        }
+                                                        else{
+                                                            countload = 1;
+                                                        }
+                                                        
+                                                        
+                                                        list9 = data["yData"];
+                                                        
+                                                        repo_bar.setOption({
+                                                            series : [
+                                                            {
+                                                                name:'价值',
+                                                                type:'bar',
+                                                                yAxisIndex: 1,
+                                                                data:list9,
+                                                                markLine : {
+                                                                    data : [
+                                                                        {type : 'average', name : '平均值'}
+                                                                    ]
+                                                                }
+                                                            }
+                                                            ]
+                                                        });
+                                                        
+                                                        $("#totalvalue").html("¥"+Math.round(data.other.total));
+                                                        $("#totalvaluestr").html(data.other.message+"  XD");
+                                                        
+                                                        var reponame = data.other.repo;
+                                                        var i;
+                                                        for(i=0;i<reponame.length;i++){
+                                                            if(reponame[i]=='/')
+                                                                break;
+                                                        }
+                                                        reponame = reponame.substring(i+1,reponame.length);
+                                                        $("#mostvaluerepo").html(reponame);
+                                                        $("#mostrepovalue").html("¥"+Math.round(data.other.value)); $("#mostvaluerepopercent").html((data.other.percent*100).toFixed(2)+"%");
+                                                        
+                                                    });
+                                                    
+                                                    $(window).resize(function () {
+                                                        $(repo_bar).resize();
+                                                    })
+                                                    
+                                                </script>
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    
+                                    </div>
+                                    
+                                    <div class="tab-pane" id="tab_repo">
+                                        
+                                        <div class="row clearfix" style="padding-top:25px">
+                                            <div class="col-md-12 column">
+                                        
+                                                <div class="box box-primary">
+                                                    <div class="box-header">
+                                                      <h3 class="box-title">Creat Repos</h3>
+                                                    </div><!-- /.box-header -->
+                                                    <div class="box-body">
+                                                      <table id="creat" class="table table-bordered table-hover">
+                                                        <thead>
+                                                          <tr>
+                                                            <th>Full Name</th>
+                                                            <th>Creat Date</th>
+                                                            <th>Update Date</th>
+                                                            <th>Value</th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          
+                                                        #foreach($userRelatedRepo in $userTotal.getCreatedRepos())
+                                                            #set($repo = $userRelatedRepo.getRepository())
+                                                            <tr>    
+                                                                <td><a href="/repoDetail?owner=$repo.owner.login&repoName=$repo.name">$repo.owner.login<span>/</span>$repo.name</a></td>
+                                                                <td>$userRelatedRepo.createdAt</td>
+                                                                <td>$userRelatedRepo.updatedAt</td>
+                                                                <td>¥$userRelatedRepo.valueInt</td>
+                                                                
+                                                            </tr>
+                                                        #end
+                                                            
+                                                        </tbody>
+                                                        <!--<tfoot>
+                                                          <tr>
+                                                            <th>Full Name</th>
+                                                            <th>Creat Date</th>
+                                                            <th>Update Date</th>
+                                                          </tr>
+                                                        </tfoot>-->
+                                                      </table>
+                                                      </div><!-- /.box-body -->
+                                                </div><!-- /.box -->
+                                                 
+                                                <div class="box box-primary">
+                                                    <div class="box-header">
+                                                      <h3 class="box-title">Contribute Repos</h3>
+                                                    </div><!-- /.box-header -->
+                                                    <div class="box-body">
+                                                      <table id="contribute" class="table table-bordered table-hover">
+                                                        <thead>
+                                                          <tr>
+                                                            <th>Full Name</th>
+                                                            <th>Creat Date</th>
+                                                            <th>Update Date</th>
+                                                            <th>Value</th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          
+                                                            #foreach($userContributedRepo in $userTotal.getContributedRepos())
+                                                            #set($repoC = $userContributedRepo.getRepository())
+                                                            <tr>    
+                                                                <td><a href="/repoDetail?owner=$repoC.owner.login&repoName=$repoC.name">$repoC.owner.login<span>/</span>$repoC.name</a></td>
+                                                                <td>$userContributedRepo.createdAt</td>
+                                                                <td>$userContributedRepo.updatedAt</td>
+                                                                <td>¥ $userContributedRepo.valueInt</td>
+                                                                
+                                                            </tr>
+                                                            #end
+                                                            
+                                                        </tbody>
+                                                        <tfoot>
+                                                          <!--<tr>
+                                                            <th>Full Name</th>
+                                                            <th>Creat Date</th>
+                                                            <th>Update Date</th>
+                                                          </tr>-->
+                                                        </tfoot>
+                                                      </table>
+                                                    </div><!-- /.box-body -->
+                                                </div><!-- /.box -->
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                            
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+            
+                </div>
+                
+        </div>
+        
+        </div>
+        
+      
+        #include("footer.vm")
+        
+    </div>
+
+    
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+        
+            <thead>
+                <tr>
+                <th>UserName</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                
+                #foreach($user in $userInfoList)
+                <tr>
+                    <td>
+                        <i class="fa fa-user"></i> 
+                        <a href="/userDetail?login=$user.login">
+                        $user.login
+                        </a>
+                    </td>
+                </tr>    
+                #end
+                
+                
+            </tbody>

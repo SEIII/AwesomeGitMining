@@ -1,0 +1,74 @@
+/*------------------------------------*\
+    $Base
+\*------------------------------------*/
+
+@darkgrey: 			#303030;
+
+*{
+  box-sizing: border-box;
+}
+
+body{
+  background: @darkgrey;
+}
+
+/*------------------------------------*\
+    $Graph
+\*------------------------------------*/
+
+.graph__wrapper{
+  width: 400px;
+  margin: 30px auto;
+  position: relative;
+  
+  
+  svg{
+    position: absolute;
+    margin: 36px 0px 0px 15px;
+  }
+}
+
+// 1. Coordinates 				================
+
+.coordinates{
+  position: absolute;
+  counter-reset: line 6;
+  
+  span{
+    display: inline-block;
+    border-bottom: 1px solid lighten(@darkgrey, 4%);
+    height: 20px;
+    width: 400px;
+    
+    &:before {
+      counter-increment: line -1;
+      content: counter(line);
+      display: inline-block;
+      color: lighten(@darkgrey, 10%);
+      margin: 10px 0px 0px -15px;
+    }
+  }
+}
+
+// 2. Animation 				================
+
+.path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 3s ease-in forwards;
+  animation-iteration-count: infinite;
+  animation-delay: 1s;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.description{
+  font-family: "Roboto";
+  color:lighten(@darkgrey, 50%);
+  text-align: center;
+  margin: 40px 0px;
+}

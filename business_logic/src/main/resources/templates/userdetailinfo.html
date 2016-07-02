@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+
+<head>
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+          page. However, you can choose any other skin. Make sure you
+          apply the skin class to the body tag so the changes take effect.
+    -->
+    <link rel="stylesheet" href="dist/css/skins/skin-blue.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+
+
+    <title>My-AweSome-GitMiNing</title>
+    <!-- jQuery 2.1.4 -->
+    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/app.min.js"></script>
+    
+
+    <script src="echarts.min.js"></script>
+
+    <!-- jQuery UI 1.11.4 -->
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+
+
+    <!-- jQuery Knob Chart -->
+    <script src="plugins/knob/jquery.knob.js"></script>
+    <!-- daterangepicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- datepicker -->
+    <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+    <!-- Bootstrap WYSIHTML5 -->
+    <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <!-- SlimScroll -->
+    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="plugins/fastclick/fastclick.min.js"></script>
+
+    
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
+    <!-- page script -->
+    <script>
+      $(function () {
+        $('#creat').DataTable({
+              "paging": true,
+              "lengthChange": false,
+              "searching": false,
+              "ordering": true,
+              "info": true,
+              "autoWidth": false
+        });
+        $('#contribute').DataTable({
+              "paging": true,
+              "lengthChange": false,
+              "searching": false,
+              "ordering": true,
+              "info": true,
+              "autoWidth": false
+        });
+      });
+    </script>
+
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="dist/js/pages/dashboard.js"></script>
+
+    <script src="echarts.min.js"></script>
+
+    <!-- Optionally, you can add Slimscroll and FastClick plugins.
+         Both of these plugins are recommended to enhance the
+         user experience. Slimscroll is required when using the
+         fixed layout. -->
+    
+
+</head>
+    
+    
+    
+<!--
+  BODY TAG OPTIONS:
+  =================
+  Apply one or more of the following classes to get the
+  desired effect
+  |---------------------------------------------------------|
+  | SKINS         | skin-blue                               |
+  |               | skin-black                              |
+  |               | skin-purple                             |
+  |               | skin-yellow                             |
+  |               | skin-red                                |
+  |               | skin-green                              |
+  |---------------------------------------------------------|
+  |LAYOUT OPTIONS | fixed                                   |
+  |               | layout-boxed                            |
+  |               | layout-top-nav                          |
+  |               | sidebar-collapse                        |
+  |               | sidebar-mini                            |
+  |---------------------------------------------------------|
+  -->
+<body class="hold-transition fixed skin-blue sidebar-mini">
+    
+    <div class="wrapper">
+
+        <!-- Main Header -->
+        <header class="main-header" id="mainheader">
+
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>G</b>IT</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg pull-left"><img src = "custompics/main.png"><b>Git</b> Mining</span>
+            </a>
+
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                       #parse("navUser.vm")
+                    </ul>
+                </div>
+                
+            </nav>
+            
+        </header>
+        
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src=$user.getAvatar_url() class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p>$user.account</p>
+                        <!-- Status -->
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                <ul class="sidebar-menu">
+
+                    <li class="active"><a href="/home"><i class="fa fa-search"></i> <span>Search</span></a></li>
+
+                    <li class="treeview">
+                        <a href="#"><i class="fa fa-bar-chart"></i> <span>Statistics</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="/userChartTest"><i class="fa fa-users"></i>User</a></li>
+                            <li><a href="/repoChartTest"><i class="fa fa-book"></i>Repository</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <!-- /.sidebar-menu -->
+            </section>
+            <!-- /.sidebar -->
+            
+        </aside>
+        
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>User<small>Awesome User Info.</small></h1>
+                <br>
+                <br><!丑陋的换行排版法>
+                <ol class="breadcrumb">
+                    <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li class="active">User</li>
+                    <li class="active">$userinfo.login</li>
+                </ol>
+            </section>
+            
+            <!-- Main content -->
+            <div class="row clearfix">
+                
+                <div class="col-md-3 column">
+                    <div class="row clearfix">
+                        <div class="col-md-2 column"></div>
+                        <div class="col-md-10 column">
+                            
+                            <!-- Profile Image -->
+                            <div class="box box-primary">
+                                <div class="box-body box-profile">
+                                    <img class="profile-user-img img-responsive img-circle" src="$userinfo.avatar_url" alt="User profile picture">
+                                    <h3 class="profile-username text-center">$userinfo.name</h3>
+                                    <p class="text-muted text-center">$userinfo.login</p>
+                                    <ul class="list-group list-group-unbordered">
+                                        <li class="list-group-item">
+                                            <b>Followers</b> <a class="pull-right">$userinfo.getFollowers()</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Following</b> <a class="pull-right">$userinfo.following</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Starred</b> <a class="pull-right">297</a>
+                                        </li>
+                                    </ul>
+                                    <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            
+                            <!-- About Me Box -->
+                            <div class="box box-primary">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">About Me</h3>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <strong><i class="fa fa-envelope margin-r-5"></i>  E-mail</strong>
+                                    <p class="text-muted">
+                                        $userinfo.getEmail()
+                                    </p>
+                                    <hr>
+                                    <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+                                    <p class="text-muted">$userinfo.location</p>
+                                    <hr>
+                                    <strong><i class="fa fa-pencil margin-r-5"></i>Main Skill</strong>
+                                    <p>
+                                        <span class="label label-success">Python</span>
+                                        <span class="label label-info">Java</span>
+                                    </p>
+                                    <hr>
+                                    <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-9 column">
+                    <div class="row clearfix">
+                        <div class="col-md-11 column">
+                            
+                            <div class="tabbable" id="tabs-441144">
+
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#tab_stat" data-toggle="tab">
+                                        <i class="fa fa-pie-chart"></i>         Stat</a></li>
+                                    <li><a href="#tab_repo" data-toggle="tab"><i class="fa fa-rss">
+                                        </i>        Create</a></li>
+                                    <li><a data-toggle="tab"><i class="fa fa-rss">
+                                        </i>        Cont</a></li>
+                                </ul>
+                                
+                                <div class="tab-content">
+                                    
+                                    <div class="tab-pane active" id="tab_stat">
+                                        
+                                        <div class="row clearfix">
+                                            
+                                            <div class="col-md-6 column" id="userRadar">
+                                                <div id="radarContainer"></div>
+                                                
+                                                <script type="text/javascript">
+                                                    var w1 = $("#userRadar").innerWidth();
+                                                    var h1 = 350;
+                                                    $("#radarContainer").width(w1);
+                                                    $("#radarContainer").height(h1);
+                                                </script>
+                                                
+                                                <script type="text/javascript">
+                                                    $(window).resize(function(){
+                                                        var w1 = $("#userRadar").innerWidth();
+                                                        var h1 = 350;
+                                                        $("#radarContainer").width(w1);
+                                                        $("#radarContainer").height(h1);
+                                                    });
+                                                </script>
+                                                
+                                                <script>
+                                                    var user_radar = echarts.init(document.getElementById('radarContainer'));
+                                                    option = {
+                                                        title: {
+                                                            text: ''
+                                                        },
+                                                        tooltip: {},
+                                                        legend: {
+                                                            data: ['']
+                                                        },
+                                                        radar: {
+                                                            // shape: 'circle',
+                                                            indicator: [
+                                                                {
+                                                                    name: 'Creative',
+                                                                    max: 10
+                                                                },
+                                                                {
+                                                                    name: 'Variety',
+                                                                    max: 10
+                                                                },
+                                                                {
+                                                                    name: 'Geak',
+                                                                    max: 10
+                                                                },
+                                                                {
+                                                                    name: 'Core',
+                                                                    max: 10
+                                                                },
+                                                                {
+                                                                    name: 'Activity',
+                                                                    max: 10
+                                                                },
+                                                                {
+                                                                    name: 'Hot',
+                                                                    max: 10
+                                                                }
+                                                            ]
+                                                        },
+                                                        series: [{
+                                                            name: 'userinfo',
+                                                            type: 'radar',
+                                                            data: [
+                                                                {
+                                                                    value: [3, 4, 5, 6, 7, 8],
+                                                                    name: 'my_info'
+                                                                }
+                                                            ]
+                                                        }]
+                                                    };
+                                                    user_radar.setOption(option);
+                                                    
+                                                    $(window).resize(function () {
+                                                        $(user_radar).resize();
+                                                    })
+                                                    
+                                                </script>
+                                                
+                                            </div>
+                                            
+                                            <div class="col-md-6 column" style="padding-left:30px">
+                                                
+                                                <br>
+                                                <br>
+                                                <!-- solid sales graph -->
+                                                <div class="box box-solid bg-teal-gradient">
+                                                    <div class="box-footer no-border">
+                                                        <div class="row">
+                                                            <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                                                                <input id="creativeValue" type="text" class="knob"  data-readonly="true" value="30" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                                                                <div class="knob-label">Creative</div>
+                                                            </div>
+                                                            <!-- ./col -->
+                                                            <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                                                                <input id="varietyValue" type="text" class="knob" data-readonly="true" value="40" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                                                                <div class="knob-label">Variety</div>
+                                                            </div>
+                                                            <!-- ./col -->
+                                                            <div class="col-xs-4 text-center">
+                                                                <input id="geakValue" type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                                                                <div class="knob-label">Geak</div>
+                                                            </div>
+                                                            <!-- ./col -->
+                                                        </div>
+                                                        <!-- /.row -->
+                                                    </div>
+                                                    <!-- /.box-footer -->
+                                                </div>
+                                                <!-- /.box -->
+
+                                                
+                                                <!-- solid sales graph -->
+                                                <div class="box box-solid bg-teal-gradient">
+                                                    <div class="box-footer no-border">
+                                                        <div class="row">
+                                                            <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                                                                <input id="coreValue" type="text" class="knob" data-readonly="true" value="60" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                                                                <div class="knob-label">Core</div>
+                                                            </div>
+                                                            <!-- ./col -->
+                                                            <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                                                                <input id="activityValue" type="text" class="knob" data-readonly="true" value="70" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                                                                <div class="knob-label">Activity</div>
+                                                            </div>
+                                                            <!-- ./col -->
+                                                            <div class="col-xs-4 text-center">
+                                                                <input id="hotValue" type="text" class="knob" data-readonly="true" value="80" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                                                                <div class="knob-label">Hot</div>
+                                                            </div>
+                                                            <!-- ./col -->
+                                                        </div>
+                                                        <!-- /.row -->
+                                                    </div>
+                                                    <!-- /.box-footer -->
+                                                </div>
+                                                <!-- /.box -->
+                                                
+                                                <div class="form-group" style="margin-left:10px">
+                                                    <label>
+                                                        <input type="checkbox" class="icheckbox_flat-blue" style="margin-top:-2px" onclick="compare()">
+                                                        <span style="font-size:17px;font-weight:500">Compare  stat   with  me</span>
+                                                    </label>
+                                                </div>
+                                                
+                                                <script>
+                                                    var is_cmp_select = false;
+                                                    function compare(){
+                                                        if(is_cmp_select==false){
+                                                            is_cmp_select = true;
+                                                            option = {
+                                                                title: {
+                                                                    text: ''
+                                                                },
+                                                                tooltip: {},
+                                                                legend: {
+                                                                    data: ['']
+                                                                },
+                                                                radar: {
+                                                                    indicator: [
+                                                                        {
+                                                                            name: 'Creative',
+                                                                            max: 10
+                                                                        },
+                                                                        {
+                                                                            name: 'Variety',
+                                                                            max: 10
+                                                                        },
+                                                                        {
+                                                                            name: 'Geak',
+                                                                            max: 10
+                                                                        },
+                                                                        {
+                                                                            name: 'Core',
+                                                                            max: 10
+                                                                        },
+                                                                        {
+                                                                            name: 'Activity',
+                                                                            max: 10
+                                                                        },
+                                                                        {
+                                                                            name: 'Hot',
+                                                                            max: 10
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                series: [{
+                                                                    name: 'userinfo',
+                                                                    type: 'radar',
+                                                                    data: [
+                                                                        {
+                                                                            value: [3, 4, 5, 6, 7, 8],
+                                                                            name: 'my_info'
+                                                                        },
+                                                                        {
+                                                                            value: [8, 7, 6, 5, 4, 3],
+                                                                            name: 'info'
+                                                                        }
+                                                                    ]
+                                                                }]
+                                                            };
+                                                            user_radar.setOption(option);
+                                                        }
+                                                        else{
+                                                            is_cmp_select = false;
+                                                            option = {
+                                                                title: {
+                                                                    text: ''
+                                                                },
+                                                                tooltip: {},
+                                                                legend: {
+                                                                    data: ['']
+                                                                },
+                                                                radar: {
+                                                                    indicator: [
+                                                                        {
+                                                                            name: 'Creative',
+                                                                            max: 10
+                                                                        },
+                                                                        {
+                                                                            name: 'Variety',
+                                                                            max: 10
+                                                                        },
+                                                                        {
+                                                                            name: 'Geak',
+                                                                            max: 10
+                                                                        },
+                                                                        {
+                                                                            name: 'Core',
+                                                                            max: 10
+                                                                        },
+                                                                        {
+                                                                            name: 'Activity',
+                                                                            max: 10
+                                                                        },
+                                                                        {
+                                                                            name: 'Hot',
+                                                                            max: 10
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                series: [{
+                                                                    name: 'userinfo',
+                                                                    type: 'radar',
+                                                                    data: [
+                                                                        {
+                                                                            value: [3, 4, 5, 6, 7, 8],
+                                                                            name: 'my_info'
+                                                                        }
+                                                                    ]
+                                                                }]
+                                                            };
+                                                            user_radar.setOption(option);
+                                                        }
+                                                    }
+                                                </script>
+                                                
+                                            </div>
+                                            
+                                        </div>     
+                                        
+                                        <br>
+                                        
+                                        <div class="row clearfix" style="padding-bottom:20px">
+                                            
+                                            <div class="col-md-6 column" style="padding-top:60px">
+                                                
+                                                <div class="callout" style="background-color:#ffffff;border-left:4px solid #eee;border-color:#0097bc;padding-top:20px;padding-bottom:20px;margin-bottom:20px">
+                                                    
+                                                    <p>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8">你的仓库共创造了 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:500;font-size:24px;opacity:1"> ¥800 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8"> 的价值</span>
+                                                    </p>
+                                                    
+                                                    <p style="padding-left:30px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:14px;opacity:0.8">这可以在希尔顿大酒店住一晚XD</span>
+                                                    </p>
+                                                    
+                                                </div>
+                                                
+                                                <div class="callout" style="background-color:#ffffff;border-left:4px solid #eee;border-color:#00a65a;padding-top:20px;padding-bottom:20px;margin-bottom:20px">
+                                                    
+                                                    <p>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8">你生产力最高的仓库是 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:500;font-size:20px;opacity:1"> CSEⅢ </span>
+                                                    </p>
+                                                    
+                                                    <p style="padding-left:30px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:14px;opacity:0.8">完成了相当于 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:18px;opacity:1"> 3 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:14px;opacity:0.8"> 个人的工作</span> 
+                                                    </p>
+                                                    
+                                                    <p>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8">你创造价值最多的仓库是 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:500;font-size:20px;opacity:1"> AGravity </span>
+                                                    </p>
+                                                    
+                                                    <p style="padding-left:30px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:14px;opacity:0.8">占总价值的 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:18px;opacity:1"> 80% </span>
+                                                    </p>
+                                                    
+                                                    <p>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8">你创造价值最多的语言是 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:500;font-size:20px;opacity:1"> Java </span>
+                                                    </p>
+                                                    
+                                                    <p style="padding-left:30px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:14px;opacity:0.8">占总价值的 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:18px;opacity:1"> 85% </span>
+                                                    </p>
+                                                    
+                                                </div>
+                                                
+                                                <div class="callout" style="background-color:#ffffff;border-left:4px solid #eee;border-color:#f39c12;padding-top:20px;padding-bottom:20px;margin-bottom:20px">
+                                                    
+                                                    <p>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8">共有 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:500;font-size:24px;opacity:1"> 7 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8"> 种语言出现在了你的仓库中</span>
+                                                    </p>
+                                                    
+                                                    <p>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8">其中 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:500;font-size:24px;opacity:1"> HTML </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8"> 成为了主角</span>    
+                                                    </p>
+                                                    
+                                                    <p style="padding-left:30px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:14px;opacity:0.8">占总代码量的 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:18px;opacity:1"> 60% </span>
+                                                    </p>
+                                                    
+                                                </div>
+                                                
+                                                <div class="callout" style="background-color:#ffffff;border-left:4px solid #eee;border-color:#dd4b39;padding-top:20px;padding-bottom:20px;margin-bottom:20px">
+                                                    
+                                                    <p>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:500;font-size:24px;opacity:1"> 3 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8"> 年里共有 </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:500;font-size:24px;opacity:1"> 1233k </span>
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:16px;opacity:0.8"> 字节代码被你上传</span>
+                                                    </p>
+                                                    
+                                                    <p style="padding-left:30px">
+                                                    <span style="font-family:Microsoft YaHei;font-weight:400;font-size:14px;opacity:0.8">相当于完成了一个linux操作系统XD</span>
+                                                    </p>
+                                                    
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                                    
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                            <div class="col-md-6 column" id="userLine">
+                                                
+                                                <div id="lineContainer"></div>
+                                                
+                                                <script type="text/javascript">
+                                                    var w2 = $("#userLine").innerWidth();
+                                                    var h2 = 400;
+                                                    $("#lineContainer").width(w2);
+                                                    $("#lineContainer").height(h2);
+                                                </script>
+                                                
+                                                <script type="text/javascript">
+                                                    $(window).resize(function(){
+                                                        var w2 = $("#userLine").innerWidth();
+                                                        var h2 = 400;
+                                                        $("#lineContainer").width(w2);
+                                                        $("#lineContainer").height(h2);
+                                                    });
+                                                </script>
+                                                
+                                                <script>
+                                                    var user_line = echarts.init(document.getElementById('lineContainer'));
+                                                    option = {
+                                                        title: {
+                                                            text: '',
+                                                        },
+                                                        tooltip : {
+                                                            trigger: 'axis',
+                                                            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                                                                type : 'shadow'        // 默认为直线，可选为：'line' | 
+                                                            },
+                                                            formatter: function (params) {
+                                                                var tar = params[1];
+                                                                return tar.name + '<br/>' + tar.seriesName + ' : ' + tar.value;
+                                                            }
+                                                        },
+                                                        toolbox: {
+                                                            feature: {
+                                                                magicType: {
+                                                                    type: ['stack', 'tiled']
+                                                                },
+                                                                dataView: {},
+                                                                saveAsImage: {
+                                                                    pixelRatio: 2
+                                                                }
+                                                            }
+                                                        },
+                                                        grid: {
+                                                            left: '3%',
+                                                            right: '4%',
+                                                            bottom: '3%',
+                                                            containLabel: true
+                                                        },
+                                                        xAxis: {
+                                                            type : 'category',
+                                                            splitLine: {show:false},
+                                                            data : ['Total','Java','C++','Html','C#','Ruby','Javascript','Python']
+                                                        },
+                                                        yAxis: {
+                                                            type : 'value'
+                                                        },
+                                                        series: [
+                                                            {
+                                                                name: '辅助',
+                                                                type: 'bar',
+                                                                stack:  'sum',
+                                                                itemStyle: {
+                                                                    normal: {
+                                                                        barBorderColor: 'rgba(0,0,0,0)',
+                                                                        color: 'rgba(0,0,0,0)'
+                                                                    },
+                                                                    emphasis: {
+                                                                        barBorderColor: 'rgba(0,0,0,0)',
+                                                                        color: 'rgba(0,0,0,0)'
+                                                                    }
+                                                                },
+                                                                data: [0, 2100, 1800, 1600, 700, 400, 300, 0]
+                                                            },
+                                                            {
+                                                                name: '生活费',
+                                                                type: 'bar',
+                                                                stack: 'sum',
+                                                                label: {
+                                                                    normal: {
+                                                                        show: true,
+                                                                        position: 'inside'
+                                                                    }
+                                                                },
+                                                                itemStyle: {
+                                                                    normal: {
+                                                                        barBorderColor: 'rgba(70,130,180,0.8)',
+                                                                        color: 'rgba(70,130,180,0.8)'
+                                                                    },
+                                                                    emphasis: {
+                                                                        barBorderColor: 'rgba(70,130,180,0.8)',
+                                                                        color: 'rgba(70,130,180,0.8)'
+                                                                    }
+                                                                },
+                                                                data:[2900, 800, 300, 200, 900, 300, 100, 300]
+                                                            }
+                                                        ]
+                                                    };
+                                                    user_line.setOption(option);
+                                                    
+                                                    $(window).resize(function () {
+                                                        $(user_line).resize();
+                                                    })
+                                                    
+                                                </script>
+                                                
+                                                <div id="roseContainer"></div>
+                                                
+                                                <script type="text/javascript">
+                                                    var w3 = $("#userLine").innerWidth();
+                                                    var h3 = 400;
+                                                    $("#roseContainer").width(w3);
+                                                    $("#roseContainer").height(h3);
+                                                </script>
+                                                
+                                                <script type="text/javascript">
+                                                    $(window).resize(function(){
+                                                        var w3 = $("#userLine").innerWidth();
+                                                        var h3 = 400;
+                                                        $("#roseContainer").width(w3);
+                                                        $("#roseContainer").height(h3);
+                                                    });
+                                                </script>
+                                                
+                                                <script>
+                                                    var user_rose = echarts.init(document.getElementById('roseContainer'));
+                                                    option = {
+                                                        title : {
+                                                            text: '',
+                                                            x:'center'
+                                                        },
+                                                        tooltip : {
+                                                            trigger: 'item',
+                                                            formatter: "{a} <br/>{b} : {c} ({d}%)"
+                                                        },
+                                                        legend: {
+                                                            x : 'center',
+                                                            y : 'bottom',
+                                                            data:['rose1','rose2','rose3','rose4','rose5','rose6','rose7','rose8']
+                                                        },
+                                                        calculable : true,
+                                                        series : [
+                                                            {
+                                                                name:'面积模式',
+                                                                type:'pie',
+                                                                radius : [30, 110],
+                                                                center : ['50%', 200],
+                                                                roseType : 'area',
+                                                                data:[
+                                                                    {value:10, name:'rose1'},
+                                                                    {value:5, name:'rose2'},
+                                                                    {value:15, name:'rose3'},
+                                                                    {value:25, name:'rose4'},
+                                                                    {value:20, name:'rose5'},
+                                                                    {value:35, name:'rose6'},
+                                                                    {value:30, name:'rose7'},
+                                                                    {value:40, name:'rose8'}
+                                                                ]
+                                                            }
+                                                        ]
+                                                    };
+                                                    user_rose.setOption(option);
+                                                    
+                                                    $(window).resize(function () {
+                                                        $(user_rose).resize();
+                                                    })
+                                                    
+                                                </script>
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                
+                                    </div>
+                                    
+                                    <div class="tab-pane" id="tab_repo">
+                                        
+                                        <div class="row clearfix" style="padding-top:25px">
+                                            <div class="col-md-12 column">
+                                        
+                                                <div class="box box-primary">
+                                                    <div class="box-header">
+                                                      <h3 class="box-title">Creat Repos</h3>
+                                                    </div><!-- /.box-header -->
+                                                    <div class="box-body">
+                                                      <table id="creat" class="table table-bordered table-hover">
+                                                        <thead>
+                                                          <tr>
+                                                            <th>Rendering engine</th>
+                                                            <th>Browser</th>
+                                                            <th>Platform(s)</th>
+                                                            <th>Engine version</th>
+                                                            <th>CSS grade</th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr>
+                                                            <td>Trident</td>
+                                                            <td>Internet
+                                                              Explorer 4.0</td>
+                                                            <td>Win 95+</td>
+                                                            <td> 4</td>
+                                                            <td>X</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Trident</td>
+                                                            <td>Internet
+                                                              Explorer 5.0</td>
+                                                            <td>Win 95+</td>
+                                                            <td>5</td>
+                                                            <td>C</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Trident</td>
+                                                            <td>Internet
+                                                              Explorer 5.5</td>
+                                                            <td>Win 95+</td>
+                                                            <td>5.5</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Trident</td>
+                                                            <td>Internet
+                                                              Explorer 6</td>
+                                                            <td>Win 98+</td>
+                                                            <td>6</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Trident</td>
+                                                            <td>Internet Explorer 7</td>
+                                                            <td>Win XP SP2+</td>
+                                                            <td>7</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Trident</td>
+                                                            <td>AOL browser (AOL desktop)</td>
+                                                            <td>Win XP</td>
+                                                            <td>6</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Firefox 1.0</td>
+                                                            <td>Win 98+ / OSX.2+</td>
+                                                            <td>1.7</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Firefox 1.5</td>
+                                                            <td>Win 98+ / OSX.2+</td>
+                                                            <td>1.8</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Firefox 2.0</td>
+                                                            <td>Win 98+ / OSX.2+</td>
+                                                            <td>1.8</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Firefox 3.0</td>
+                                                            <td>Win 2k+ / OSX.3+</td>
+                                                            <td>1.9</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Camino 1.0</td>
+                                                            <td>OSX.2+</td>
+                                                            <td>1.8</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Camino 1.5</td>
+                                                            <td>OSX.3+</td>
+                                                            <td>1.8</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Netscape 7.2</td>
+                                                            <td>Win 95+ / Mac OS 8.6-9.2</td>
+                                                            <td>1.7</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Netscape Browser 8</td>
+                                                            <td>Win 98SE+</td>
+                                                            <td>1.7</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Netscape Navigator 9</td>
+                                                            <td>Win 98+ / OSX.2+</td>
+                                                            <td>1.8</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Mozilla 1.0</td>
+                                                            <td>Win 95+ / OSX.1+</td>
+                                                            <td>1</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Mozilla 1.1</td>
+                                                            <td>Win 95+ / OSX.1+</td>
+                                                            <td>1.1</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Mozilla 1.2</td>
+                                                            <td>Win 95+ / OSX.1+</td>
+                                                            <td>1.2</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Mozilla 1.3</td>
+                                                            <td>Win 95+ / OSX.1+</td>
+                                                            <td>1.3</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Mozilla 1.4</td>
+                                                            <td>Win 95+ / OSX.1+</td>
+                                                            <td>1.4</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Mozilla 1.5</td>
+                                                            <td>Win 95+ / OSX.1+</td>
+                                                            <td>1.5</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Mozilla 1.6</td>
+                                                            <td>Win 95+ / OSX.1+</td>
+                                                            <td>1.6</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Mozilla 1.7</td>
+                                                            <td>Win 98+ / OSX.1+</td>
+                                                            <td>1.7</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Mozilla 1.8</td>
+                                                            <td>Win 98+ / OSX.1+</td>
+                                                            <td>1.8</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Seamonkey 1.1</td>
+                                                            <td>Win 98+ / OSX.2+</td>
+                                                            <td>1.8</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Epiphany 2.20</td>
+                                                            <td>Gnome</td>
+                                                            <td>1.8</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Webkit</td>
+                                                            <td>Safari 1.2</td>
+                                                            <td>OSX.3</td>
+                                                            <td>125.5</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Webkit</td>
+                                                            <td>Safari 1.3</td>
+                                                            <td>OSX.3</td>
+                                                            <td>312.8</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Webkit</td>
+                                                            <td>Safari 2.0</td>
+                                                            <td>OSX.4+</td>
+                                                            <td>419.3</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Presto</td>
+                                                            <td>Opera 9.5</td>
+                                                            <td>Win 88+ / OSX.3+</td>
+                                                            <td>-</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Presto</td>
+                                                            <td>Opera for Wii</td>
+                                                            <td>Wii</td>
+                                                            <td>-</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Presto</td>
+                                                            <td>Nokia N800</td>
+                                                            <td>N800</td>
+                                                            <td>-</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Presto</td>
+                                                            <td>Nintendo DS browser</td>
+                                                            <td>Nintendo DS</td>
+                                                            <td>8.5</td>
+                                                            <td>C/A<sup>1</sup></td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>KHTML</td>
+                                                            <td>Konqureror 3.1</td>
+                                                            <td>KDE 3.1</td>
+                                                            <td>3.1</td>
+                                                            <td>C</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>KHTML</td>
+                                                            <td>Konqureror 3.3</td>
+                                                            <td>KDE 3.3</td>
+                                                            <td>3.3</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>KHTML</td>
+                                                            <td>Konqureror 3.5</td>
+                                                            <td>KDE 3.5</td>
+                                                            <td>3.5</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Tasman</td>
+                                                            <td>Internet Explorer 4.5</td>
+                                                            <td>Mac OS 8-9</td>
+                                                            <td>-</td>
+                                                            <td>X</td>
+                                                          </tr>
+                                                        </tbody>
+                                                        <tfoot>
+                                                          <tr>
+                                                            <th>Rendering engine</th>
+                                                            <th>Browser</th>
+                                                            <th>Platform(s)</th>
+                                                            <th>Engine version</th>
+                                                            <th>CSS grade</th>
+                                                          </tr>
+                                                        </tfoot>
+                                                      </table>
+                                                      </div><!-- /.box-body -->
+                                                </div><!-- /.box -->
+                                                 
+                                                <div class="box box-primary">
+                                                    <div class="box-header">
+                                                      <h3 class="box-title">Contribute Repos</h3>
+                                                    </div><!-- /.box-header -->
+                                                    <div class="box-body">
+                                                      <table id="contribute" class="table table-bordered table-hover">
+                                                        <thead>
+                                                          <tr>
+                                                            <th>Rendering engine</th>
+                                                            <th>Browser</th>
+                                                            <th>Platform(s)</th>
+                                                            <th>Engine version</th>
+                                                            <th>CSS grade</th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr>
+                                                            <td>Trident</td>
+                                                            <td>Internet
+                                                              Explorer 4.0</td>
+                                                            <td>Win 95+</td>
+                                                            <td> 4</td>
+                                                            <td>X</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Trident</td>
+                                                            <td>Internet
+                                                              Explorer 5.0</td>
+                                                            <td>Win 95+</td>
+                                                            <td>5</td>
+                                                            <td>C</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Trident</td>
+                                                            <td>Internet
+                                                              Explorer 5.5</td>
+                                                            <td>Win 95+</td>
+                                                            <td>5.5</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Trident</td>
+                                                            <td>Internet
+                                                              Explorer 6</td>
+                                                            <td>Win 98+</td>
+                                                            <td>6</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Trident</td>
+                                                            <td>Internet Explorer 7</td>
+                                                            <td>Win XP SP2+</td>
+                                                            <td>7</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Trident</td>
+                                                            <td>AOL browser (AOL desktop)</td>
+                                                            <td>Win XP</td>
+                                                            <td>6</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Firefox 1.0</td>
+                                                            <td>Win 98+ / OSX.2+</td>
+                                                            <td>1.7</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Firefox 1.5</td>
+                                                            <td>Win 98+ / OSX.2+</td>
+                                                            <td>1.8</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Firefox 2.0</td>
+                                                            <td>Win 98+ / OSX.2+</td>
+                                                            <td>1.8</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Firefox 3.0</td>
+                                                            <td>Win 2k+ / OSX.3+</td>
+                                                            <td>1.9</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Camino 1.0</td>
+                                                            <td>OSX.2+</td>
+                                                            <td>1.8</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Camino 1.5</td>
+                                                            <td>OSX.3+</td>
+                                                            <td>1.8</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Netscape 7.2</td>
+                                                            <td>Win 95+ / Mac OS 8.6-9.2</td>
+                                                            <td>1.7</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Netscape Browser 8</td>
+                                                            <td>Win 98SE+</td>
+                                                            <td>1.7</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Netscape Navigator 9</td>
+                                                            <td>Win 98+ / OSX.2+</td>
+                                                            <td>1.8</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Mozilla 1.0</td>
+                                                            <td>Win 95+ / OSX.1+</td>
+                                                            <td>1</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Mozilla 1.1</td>
+                                                            <td>Win 95+ / OSX.1+</td>
+                                                            <td>1.1</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Mozilla 1.2</td>
+                                                            <td>Win 95+ / OSX.1+</td>
+                                                            <td>1.2</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Mozilla 1.3</td>
+                                                            <td>Win 95+ / OSX.1+</td>
+                                                            <td>1.3</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Mozilla 1.4</td>
+                                                            <td>Win 95+ / OSX.1+</td>
+                                                            <td>1.4</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Mozilla 1.5</td>
+                                                            <td>Win 95+ / OSX.1+</td>
+                                                            <td>1.5</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Mozilla 1.6</td>
+                                                            <td>Win 95+ / OSX.1+</td>
+                                                            <td>1.6</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Mozilla 1.7</td>
+                                                            <td>Win 98+ / OSX.1+</td>
+                                                            <td>1.7</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Mozilla 1.8</td>
+                                                            <td>Win 98+ / OSX.1+</td>
+                                                            <td>1.8</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Seamonkey 1.1</td>
+                                                            <td>Win 98+ / OSX.2+</td>
+                                                            <td>1.8</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Gecko</td>
+                                                            <td>Epiphany 2.20</td>
+                                                            <td>Gnome</td>
+                                                            <td>1.8</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Webkit</td>
+                                                            <td>Safari 1.2</td>
+                                                            <td>OSX.3</td>
+                                                            <td>125.5</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Webkit</td>
+                                                            <td>Safari 1.3</td>
+                                                            <td>OSX.3</td>
+                                                            <td>312.8</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Webkit</td>
+                                                            <td>Safari 2.0</td>
+                                                            <td>OSX.4+</td>
+                                                            <td>419.3</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Presto</td>
+                                                            <td>Opera 9.5</td>
+                                                            <td>Win 88+ / OSX.3+</td>
+                                                            <td>-</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Presto</td>
+                                                            <td>Opera for Wii</td>
+                                                            <td>Wii</td>
+                                                            <td>-</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Presto</td>
+                                                            <td>Nokia N800</td>
+                                                            <td>N800</td>
+                                                            <td>-</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Presto</td>
+                                                            <td>Nintendo DS browser</td>
+                                                            <td>Nintendo DS</td>
+                                                            <td>8.5</td>
+                                                            <td>C/A<sup>1</sup></td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>KHTML</td>
+                                                            <td>Konqureror 3.1</td>
+                                                            <td>KDE 3.1</td>
+                                                            <td>3.1</td>
+                                                            <td>C</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>KHTML</td>
+                                                            <td>Konqureror 3.3</td>
+                                                            <td>KDE 3.3</td>
+                                                            <td>3.3</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>KHTML</td>
+                                                            <td>Konqureror 3.5</td>
+                                                            <td>KDE 3.5</td>
+                                                            <td>3.5</td>
+                                                            <td>A</td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td>Tasman</td>
+                                                            <td>Internet Explorer 4.5</td>
+                                                            <td>Mac OS 8-9</td>
+                                                            <td>-</td>
+                                                            <td>X</td>
+                                                          </tr>
+                                                        </tbody>
+                                                        <tfoot>
+                                                          <tr>
+                                                            <th>Rendering engine</th>
+                                                            <th>Browser</th>
+                                                            <th>Platform(s)</th>
+                                                            <th>Engine version</th>
+                                                            <th>CSS grade</th>
+                                                          </tr>
+                                                        </tfoot>
+                                                      </table>
+                                                    </div><!-- /.box-body -->
+                                                </div><!-- /.box -->
+                                                
+                                                <div id="repoRoseContainer"></div>
+                                                
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                            
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+            
+                </div>
+                
+        </div>
+        
+        </div>
+        
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="pull-right hidden-xs">
+                Fish Hunters
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+        </footer>
+        
+    </div>
+
+    
+</body>
+
+</html>
