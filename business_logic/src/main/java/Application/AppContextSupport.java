@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
  * @author 申彬
  * 这个类用于在需要的时候获得springContext，不过不建议使用
  */
+
+
+
 @Component
 public class AppContextSupport implements ApplicationContextAware {
 
