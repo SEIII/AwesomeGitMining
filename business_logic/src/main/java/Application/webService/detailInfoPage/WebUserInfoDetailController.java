@@ -40,6 +40,8 @@ public class WebUserInfoDetailController {
     GitUserTotalInfoLogicService gitUserTotalService;
 
 
+
+
     @RequestMapping("/userDetail")
     public String getUserDetail(@RequestParam("login") String login,Model model) {
         UserInfo info = queryService.findUserInfo(login);

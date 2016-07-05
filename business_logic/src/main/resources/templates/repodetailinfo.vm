@@ -1175,6 +1175,144 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 </div>
             </div>
+            
+            <br>
+            <br>
+            
+           
+            
+            
+            <div class="row clearfix">
+            
+                <div class="col-md-1 column"></div>
+                <div class="col-md-10 column"
+                >
+                #foreach ($i in $itemList)
+                          
+                <div class="col-md-6 column" id="contributionContainer$i.getAuthor().getLogin()">
+                    <div class="box box-widget widget-user-2">
+                        <div class="widget-user-header bg-gray">
+                  <div class="widget-user-image">
+                    <img class="img-circle" src="$i.author.avatar_url" alt="User Avatar">
+                  </div><!-- /.widget-user-image -->
+                  <h3 class="widget-user-username"><a href="/userDetail?login=$i.author.login">$i.author.login</a></h3>
+                  <h5 class="widget-user-desc">total contribution: $i.total</h5>
+                </div>
+                        <div class="box-body">
+                            <div id="contribution$i.getAuthor().getLogin()"></div>
+                            
+                            <script type="text/javascript">
+                                var w_contri = $("#contributionContainer$i.getAuthor().getLogin()").width;
+                                var h_contri = 200;
+
+                                $("#contribution$i.getAuthor().getLogin()").width(w_contri);
+                                $("#contribution$i.getAuthor().getLogin()").height(h_contri);
+                            </script>
+
+
+                            <script type="text/javascript">
+                                $(window).resize(function () {
+
+                                var w_contri = $("#contributionContainer$i.getAuthor().getLogin()").width;
+                                var h_contri = 200;
+
+                                $("#contribution$i.getAuthor().getLogin()").width(w_contri);
+                                $("#contribution$i.getAuthor().getLogin()").height(h_contri);
+
+                                });
+                            </script>
+                            
+                            
+                            
+                                                        <script type="text/javascript">
+                                var myChartContribution = echarts.init(document.getElementById('contribution$i.getAuthor().getLogin()'));
+
+                                var optionContribution = {
+                                    
+                                    tooltip: {
+                                        trigger: 'axis'
+                                    },
+                                    grid: {
+                                        top: '10%',
+                                        left: '3%',
+                                        right: '4%',
+                                        bottom: '10%',
+                                        containLabel: true
+                                    },
+                                    xAxis: [
+                                        {
+                                            type: 'category',
+                                            boundaryGap: false,
+                                            data: []
+        }
+    ],
+                                    yAxis: [
+                                        {
+                                            type: 'value'
+        }
+    ],
+                                    series: [
+                                        {
+                                            name: 'Addition',
+                                            type: 'line',
+                                            areaStyle: {
+                                                normal: {}
+                                            },
+                                            data: $i.getAddList(),
+                                            itemStyle: {
+                                                normal: {
+                                                    color: '#6CC644'
+                                                }
+                                            }
+        },
+                                        {
+                                            name: 'Deletion',
+                                            type: 'line',
+                                            areaStyle: {
+                                                normal: {}
+                                            },
+                                            data: $i.getDeleteList(),
+                                            itemStyle: {
+                                                normal: {
+                                                    color: '#BD2C00'
+                                                }
+                                            }
+        }
+    ]
+                                };
+                                myChartContribution.setOption(optionContribution);
+      
+                                                                            
+                                $(window).resize(function () {
+                                            $(myChartContribution).resize();
+                                        })
+                                
+                            </script>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                    
+                #end
+                </div>
+            </div>
 
             <!-- /.content -->
         </div>
