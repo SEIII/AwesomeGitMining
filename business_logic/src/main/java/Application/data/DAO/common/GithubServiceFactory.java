@@ -12,12 +12,21 @@ import org.eclipse.egit.github.core.service.EventService;
 import org.eclipse.egit.github.core.service.OrganizationService;
 import org.eclipse.egit.github.core.service.RepositoryService;
 import org.eclipse.egit.github.core.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.stereotype.Component;
 
+import Application.AppContextSupport;
+import Application.GitMiningServer;
+import Application.common.data_service.GitUserTotalInfoService;
+import Application.data.DAO.sql.SQLTemplate;
 import Application.gitAPIExtends.GitMiningRepoService;
 import Application.gitAPIExtends.GitMiningUserService;
 import Application.gitAPIExtends.GithubRepoStatsService;
 import Application.gitAPIExtends.UserSearchService;
 
+@Component
 public class GithubServiceFactory {
 
     static String[] gitHubTokens;
@@ -26,16 +35,6 @@ public class GithubServiceFactory {
 
     static {
         random = new Random();
-        Properties pro = new Properties();
-
-        try {
-            FileReader reader = new FileReader(new File("config/dbConfig.properties"));
-            pro.load(reader);
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        gitHubTokens = pro.getProperty("gitHubTokens").split(",");
     }
 
     public static GitMiningRepoService getRepoitoryService(GitHubClient client) {
@@ -73,7 +72,7 @@ public class GithubServiceFactory {
         GitMiningUserService service = new GitMiningUserService(client);
         return service;
     }
-    
+
     public static RepositoryService getRepoitoryService() {
         GitHubClient client = new GitHubClient();
         client.setOAuth2Token(getToken());
@@ -111,14 +110,25 @@ public class GithubServiceFactory {
         searchService.getClient().setOAuth2Token(getToken());
         return searchService;
     }
-    
+
     public static CollaboratorService getCollaboratorService() {
         CollaboratorService service = new CollaboratorService();
         service.getClient().setOAuth2Token(getToken());
         return service;
     }
-	
+
 	private static String getToken() {
+
+		if(gitHubTokens == null){
+
+
+
+			SQLTemplate template = AppContextSupport.getApplicationContext()
+					.getBean(SQLTemplate.class);
+
+			gitHubTokens = template.getGithubTokens();
+		}
+
 	    int tokenIndex = random.nextInt(gitHubTokens.length);
 	    return gitHubTokens[tokenIndex];
 	}

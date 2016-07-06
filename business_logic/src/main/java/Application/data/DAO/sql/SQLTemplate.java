@@ -622,6 +622,22 @@ public class SQLTemplate {
 
 	}
 
+	public String[] getGithubTokens(){
+		String query = "select * from tokens";
+		List<String> tokens = jdbcTemplate.query(query, new RowMapper<String>(){
 
+			@Override
+			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+				// TODO Auto-generated method stub
+				return rs.getString("token");
+			}});
+
+		String[] result = new String[tokens.size()];
+		for(int i=0; i<tokens.size(); i++)
+			result[i] = tokens.get(i);
+
+		return result;
+
+	}
 
 }

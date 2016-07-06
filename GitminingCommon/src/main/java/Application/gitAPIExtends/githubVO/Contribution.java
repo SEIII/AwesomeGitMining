@@ -17,6 +17,10 @@ public class Contribution implements Serializable{
 
 	int total;
 
+	int addCount;
+
+	int deleteCount;
+
 	List<WeekContribution> weeks;
 
 	List<Integer> addList;
@@ -24,7 +28,27 @@ public class Contribution implements Serializable{
 	List<Integer> deleteList;
 
 
+	public int getAddCount(){
+		List<Integer> addList = getAddList();
+		int answer = 0;
 
+		for(int i : addList){
+			answer += i;
+		}
+
+		return answer;
+	}
+
+	public int getDeleteCount(){
+		List<Integer> deleteList = getDeleteList();
+		int answer = 0;
+
+		for(int i : deleteList){
+			answer += i;
+		}
+
+		return -1*answer;
+	}
 
 
 	public List<Integer> getAddList(){
