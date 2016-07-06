@@ -119,7 +119,7 @@
 	<modules>
 		<module>business_logic</module>
 		<module>GitminingCommon</module>
-		<module>GitminingClient</module>
+		
 
 	</modules>
 	<dependencyManagement>
