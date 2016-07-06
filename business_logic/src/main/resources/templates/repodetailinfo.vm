@@ -88,6 +88,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
          Both of these plugins are recommended to enhance the
          user experience. Slimscroll is required when using the
          fixed layout. -->
+    
+    <script>
+        var contributionList = [];
+        var myChartContribution;
+        var optionContribution;
+        
+    </script>
+    
+    
     <script type="text/javascript">
         function goRadar() {
             var a = $("#repoRadar").offset().top - document.getElementById("mainheader").offsetHeight;
@@ -1161,10 +1170,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 
                                 
                                 
-                                $(window).resize(function () {
-
-                                            $(myChart2).resize();
-                                        })
+//                                $(window).resize(function () {
+//
+//                                            $(myChart2).resize();
+//                                        })
                                 
                             </script>
 
@@ -1173,6 +1182,176 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div>
                     </div>
 
+                </div>
+            </div>
+            
+            <br>
+            <br>
+            
+           
+            
+            
+            <div class="row clearfix">
+            
+                <div class="col-md-1 column"></div>
+                <div class="col-md-10 column"
+                >
+                #foreach ($i in $itemList)
+                          
+                <div class="col-md-6 column" id="contributionContainer$i.getAuthor().getLogin()">
+                    <div class="box box-widget widget-user-2">
+                        <div class="bg-gray" style="height:75px">
+<!--
+                  <div class="widget-user-image">
+                    <img src="$i.author.avatar_url" alt="User Avatar">
+                  </div> /.widget-user-image 
+                  <h3 class="widget-user-username"><a href="/userDetail?login=$i.author.login">$i.author.login</a></h3>
+                  <h5 class="widget-user-desc">$i.total commits / <font color='#6CC644'> $i.getAddCount() ++ / </font><font color='#BD2C00'> $i.getDeleteCount() -- </font></h5>
+-->
+                            
+                <div class="row clearfix" style="height:75px">
+                    <div class="col-md-2 column" style="height:75px">
+                        
+                        <img src="$i.author.avatar_url" alt="User Avatar" height="50px" width="50px" style="margin:13px">
+                    </div>        
+                    <div class="col-md-10 column">
+                        <div class="row clearfix">
+                            <div class="col-md-12 column">
+                                
+                                <p style="margin-top:10px">
+                                    <font size="5px">
+                                    <a href="/userDetail?login=$i.author.login">$i.author.login</a></font>
+                                        <br>
+                                    $i.total commits / <font color='#6CC644'> $i.getAddCount() ++ / </font><font color='#BD2C00'> $i.getDeleteCount() -- </font>
+                                </p>
+                            </div>
+
+                        </div>
+                        
+                    </div>
+                </div>
+                            
+                        </div>
+                        <div class="box-body">
+                            <div id="contribution$i.getAuthor().getLogin()"></div>
+                            
+                            <script type="text/javascript">
+                                var w_contri = $("#contributionContainer$i.getAuthor().getLogin()").width;
+                                var h_contri = 200;
+
+                                $("#contribution$i.getAuthor().getLogin()").width(w_contri);
+                                $("#contribution$i.getAuthor().getLogin()").height(h_contri);
+                            </script>
+
+
+                            <script type="text/javascript">
+                                $(window).resize(function () {
+
+                                var w_contri = $("#contributionContainer$i.getAuthor().getLogin()").width;
+                                var h_contri = 200;
+
+                                $("#contribution$i.getAuthor().getLogin()").width(w_contri);
+                                $("#contribution$i.getAuthor().getLogin()").height(h_contri);
+
+                                });
+                            </script>
+                            
+                            
+                            
+                            <script type="text/javascript">
+                                myChartContribution = echarts.init(document.getElementById('contribution$i.getAuthor().getLogin()'));
+                                                            
+                                optionContribution = {
+                                    
+                                    tooltip: {
+                                        trigger: 'axis'
+                                    },
+                                    grid: {
+                                        top: '10%',
+                                        left: '3%',
+                                        right: '4%',
+                                        bottom: '2%',
+                                        containLabel: true
+                                    },
+                                    xAxis: [
+                                        {
+                                            type: 'category',
+                                            boundaryGap: false,
+                                            data: []
+        }
+    ],
+                                    yAxis: [
+                                        {
+                                            type: 'value'
+        }
+    ],
+                                    series: [
+                                        {
+                                            name: 'Addition',
+                                            type: 'line',
+                                            areaStyle: {
+                                                normal: {}
+                                            },
+                                            data: $i.getAddList(),
+                                            itemStyle: {
+                                                normal: {
+                                                    color: '#6CC644'
+                                                }
+                                            }
+        },
+                                        {
+                                            name: 'Deletion',
+                                            type: 'line',
+                                            areaStyle: {
+                                                normal: {}
+                                            },
+                                            data: $i.getDeleteList(),
+                                            itemStyle: {
+                                                normal: {
+                                                    color: '#BD2C00'
+                                                }
+                                            }
+        }
+    ]
+                                };
+                                myChartContribution.setOption(optionContribution);
+                                contributionList.push(myChartContribution); 
+                                                                            
+//                                $(window).resize(function () {
+//                                            $(myChartContribution).resize();
+//                                        })
+                                
+                            </script>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                    
+                #end
+                    
+                    <script>
+                         $(window).resize(function () {
+
+                                            $(myChart2).resize();
+                                        })
+//                         $(window).resize(function () {
+//                                
+//                                            $(contributionList[0]).resize();
+//                            })
+                         
+                        
+                        
+                            
+                            $(window).resize(function () {
+                                for (var index=0; index<contributionList.length; index++){
+                                            $(contributionList[index]).resize();
+                                }
+                            })
+                        
+                    </script>
+                    
+                    
                 </div>
             </div>
 

@@ -15,13 +15,10 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableCaching
 public class GitMiningServer {
 
-
-
     public static void main(String[] args) {
 
-
-
 	    setHostIP();
+
 
 
 		SpringApplication.run(GitMiningServer.class);

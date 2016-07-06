@@ -1,6 +1,7 @@
 package Application.gitAPIExtends.githubVO;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,11 +17,70 @@ public class Contribution implements Serializable{
 
 	int total;
 
+	int addCount;
+
+	int deleteCount;
+
 	List<WeekContribution> weeks;
 
+	List<Integer> addList;
+
+	List<Integer> deleteList;
 
 
+	public int getAddCount(){
+		List<Integer> addList = getAddList();
+		int answer = 0;
 
+		for(int i : addList){
+			answer += i;
+		}
+
+		return answer;
+	}
+
+	public int getDeleteCount(){
+		List<Integer> deleteList = getDeleteList();
+		int answer = 0;
+
+		for(int i : deleteList){
+			answer += i;
+		}
+
+		return -1*answer;
+	}
+
+
+	public List<Integer> getAddList(){
+		if(addList == null){
+			addList = new ArrayList<Integer>();
+			deleteList = new ArrayList<Integer>();
+
+			for(WeekContribution wc: weeks){
+				addList.add(wc.a);
+				deleteList.add(-1*wc.d);
+			}
+
+		}
+
+
+		return addList;
+	}
+
+	public List<Integer> getDeleteList(){
+		if(deleteList == null){
+			addList = new ArrayList<Integer>();
+			deleteList = new ArrayList<Integer>();
+
+			for(WeekContribution wc: weeks){
+				addList.add(wc.a);
+				deleteList.add(-1*wc.d);
+			}
+
+		}
+
+		return deleteList;
+	}
 
 	public Author getAuthor() {
 		return author;
@@ -77,6 +137,7 @@ public class Contribution implements Serializable{
 		public void setAvatar_url(String avatar_url) {
 			this.avatar_url = avatar_url;
 		}
+
 
 	}
 

@@ -20,10 +20,12 @@ import Application.common.blService.statService.StatSingleRepoService;
 import Application.common.praser.SimpleRepoProvider;
 import Application.data.DAO.common.GithubServiceFactory;
 import Application.gitAPIExtends.githubVO.CodeFrequency;
+import Application.gitAPIExtends.githubVO.Contribution;
 
 @Controller
 @RequestMapping("/statSingleRepo")
 public class WebStatSingleRepoController {
+
 
     RepositoryService githubRepoService;
 

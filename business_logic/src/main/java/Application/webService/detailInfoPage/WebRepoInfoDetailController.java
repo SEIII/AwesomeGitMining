@@ -1,6 +1,10 @@
 package Application.webService.detailInfoPage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +20,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import Application.common.DTO.FollowRepoInfo;
 import Application.common.blService.followService.FollowService;
 import Application.common.blService.statService.QueryService;
+import Application.common.blService.statService.StatSingleRepoService;
 import Application.common.info.ReposInfo;
+import Application.gitAPIExtends.githubVO.Contribution;
 
 @Controller
 @SessionAttributes("user")
@@ -28,6 +34,11 @@ public class WebRepoInfoDetailController {
     @Autowired
     FollowService followService;
 
+    @Autowired
+    StatSingleRepoService statSingleRepoService;
+
+    List<String> repoList;
+
     @RequestMapping("/repoDetail")
     public String getRepoDetail(
             @RequestParam("owner") String owner,
@@ -36,7 +47,16 @@ public class WebRepoInfoDetailController {
             ) {
         ReposInfo repoInfo = queryService.findReposInfo(owner, repoName);
         model.addAttribute("repoinfo", repoInfo);
-        return "repodetailinfo";
+        String fullName = owner + "/" + repoName;
+
+        if(statSingleRepoService.getRepoIsHit(fullName)){
+        	List<Contribution> contributions = statSingleRepoService.getRepoContributors(fullName);
+        	model.addAttribute("itemList", contributions);
+        	return "repodetailinfo";
+        }
+
+
+        return "repoLoading";
     }
 
 
@@ -79,6 +99,27 @@ public class WebRepoInfoDetailController {
     	}
 		return "";
     }
+
+
+    @RequestMapping("/contributors")
+    @ResponseBody
+    public List<Contribution> statRepoContributors(
+    		@RequestParam("owner") String owner,
+    		@RequestParam("repoName") String repoName
+    		){
+
+
+    	String fullName = owner + "/" + repoName;
+    	try {
+			Thread.sleep(1500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return statSingleRepoService.getRepoContributors(fullName);
+
+    }
+
 }
 
 
