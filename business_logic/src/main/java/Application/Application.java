@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import org.eclipse.egit.github.core.event.Event;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
@@ -16,45 +17,23 @@ import Application.common.blService.statService.StatResult;
 import Application.common.data_service.GitUserTotalInfoService;
 import Application.data.DAO.sql.SQLTemplate;
 import Application.data.data_impl.FollowDataImpl;
+import Application.data.data_impl.git.GitEventInfoImpl;
 import Application.data.data_impl.git.GitRepoInfoImpl;
 import Application.data.data_impl.git.SearchGitRepoTest;
 import Application.data.data_impl.git.SourceDataAuxiliary;
+import Application.data.data_impl.git.StatEventInfoObj;
 
 public class Application {
 
 
-    
+
     public static void main(String[] args) {
 
         ConfigurableApplicationContext context = SpringApplication
                 .run(GitMiningServer.class, args);
 
-        GitUserTotalInfoService service = context
-                .getBean(GitUserTotalInfoService.class);
-        SourceDataAuxiliary auxiliary = context
-                .getBean(SourceDataAuxiliary.class);
-        
-        
-        
-        SearchGitRepoTest searchRepo = context
-        		.getBean(SearchGitRepoTest.class);
-        
-        StatGitRepoValue statGitRepoValue = context
-        		.getBean(StatGitRepoValue.class);
 
-
-        StatSingleUserImpl statSingleUserImpl = context.getBean(StatSingleUserImpl.class);
-
-
-        GitRepoInfoImpl gitRepoInfoImpl = context.getBean(GitRepoInfoImpl.class);
-
-        StatSingleRepoImpl statSingleRepoImpl = context.getBean(StatSingleRepoImpl.class);
-
-        FollowDataImpl followDataImpl = context.getBean(FollowDataImpl.class);
-
-
-        String userLogin = null;
-
+        GitEventInfoImpl statEventInfoObj = context.getBean(GitEventInfoImpl.class);
 
 
         Scanner scanner = new Scanner(System.in);
@@ -68,6 +47,10 @@ public class Application {
 //            List<WatchUserInfo> infoList = followDataImpl.;
 //            for(WatchUserInfo info: infoList)
 //            	System.out.println(info.toString());
+            List<Event> eventList = statEventInfoObj.getWatcherEventList(params);
+            for(Event e: eventList)
+            	System.out.println(e.getActor().getLogin()+" "+e.getCreatedAt()+" "+e.getType()+" "+
+            e.getRepo().getName());
 
             long end_time = System.currentTimeMillis();
             System.out.println(
