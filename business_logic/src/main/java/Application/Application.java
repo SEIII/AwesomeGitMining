@@ -12,6 +12,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import Application.business_logic.bl.stat.StatGitRepoValue;
 import Application.business_logic.bl.stat.impl.StatSingleRepoImpl;
 import Application.business_logic.bl.stat.impl.StatSingleUserImpl;
+import Application.common.DynamicInfo;
 import Application.common.DTO.WatchUserInfo;
 import Application.common.blService.statService.StatResult;
 import Application.common.data_service.GitUserTotalInfoService;
@@ -47,10 +48,9 @@ public class Application {
 //            List<WatchUserInfo> infoList = followDataImpl.;
 //            for(WatchUserInfo info: infoList)
 //            	System.out.println(info.toString());
-            List<Event> eventList = statEventInfoObj.getWatcherEventList(params);
-            for(Event e: eventList)
-            	System.out.println(e.getActor().getLogin()+" "+e.getCreatedAt()+" "+e.getType()+" "+
-            e.getRepo().getName());
+            List<DynamicInfo> eventList = statEventInfoObj.getWatcherEventList(params);
+            for(DynamicInfo e: eventList)
+            	System.out.println(e.getLogin()+" "+e.getDateString()+" "+e.getContent());
 
             long end_time = System.currentTimeMillis();
             System.out.println(

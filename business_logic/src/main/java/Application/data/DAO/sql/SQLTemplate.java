@@ -398,25 +398,32 @@ public class SQLTemplate {
 
 	public GitMiningUserInfo getUserPassword(String account){
 		String sql = "select * from "+GITMININGUSERS+" g where g.account = "+"\'"+account + "\'";
+		System.out.println(sql);
+
 		GitMiningUserInfo info = null;
 
+		try {
+			info = jdbcTemplate.queryForObject(sql, new RowMapper<GitMiningUserInfo>(){
 
-		info = jdbcTemplate.queryForObject(sql, new RowMapper<GitMiningUserInfo>(){
+				@Override
+				public GitMiningUserInfo mapRow(ResultSet arg0, int arg1) throws SQLException {
+					// TODO Auto-generated method stub
 
-			@Override
-			public GitMiningUserInfo mapRow(ResultSet arg0, int arg1) throws SQLException {
-				// TODO Auto-generated method stub
+					GitMiningUserInfo info = new GitMiningUserInfo();
+					info.setAccount(arg0.getString("account"));
+					info.setGitid(arg0.getString("gitid"));
+					info.setPassword(arg0.getString("password"));
+					info.setAvatar_url(arg0.getString("avatarUrl"));
 
-				GitMiningUserInfo info = new GitMiningUserInfo();
-				info.setAccount(arg0.getString("account"));
-				info.setGitid(arg0.getString("gitid"));
-				info.setPassword(arg0.getString("password"));
-				info.setAvatar_url(arg0.getString("avatarUrl"));
+					return info;
+				}
 
-				return info;
-			}
+			});
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
 
-		});
 		return info;
 
 	}
