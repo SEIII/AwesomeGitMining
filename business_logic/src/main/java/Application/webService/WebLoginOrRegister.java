@@ -37,6 +37,8 @@ public class WebLoginOrRegister {
 		return "landingPage";
 	}
 
+
+
 	@RequestMapping("/loginVerify")
 	@ResponseBody
 	public String loginVerify(
@@ -45,6 +47,7 @@ public class WebLoginOrRegister {
 			Model model,
 			HttpSession session
 			){
+
 
 		GitMiningUserInfo info = loginService.verifyLogin(account, password);
 

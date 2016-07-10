@@ -232,7 +232,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 							<li><a href="/followCollection?account=$user.account"><i class="fa fa-star-o"></i> <span>Collection</span></a></li>
 							<li><a href="/watch?account=$user.account"><i class="fa fa-eye"></i> <span>Watch</span></a></li>
 							<li class="active"><a href="/home"><i class="fa fa-search"></i> <span>Search</span></a></li>
-	
+	                        <li><a href="/dynamic?account=$user.account"><i class="fa fa-bullhorn"></i> <span>Dynamic</span></a></li>
 							<li class="treeview">
 								<a href="#"><i class="fa fa-bar-chart"></i> <span>Statistics</span> <i class="fa fa-angle-left pull-right"></i></a>
 								<ul class="treeview-menu">

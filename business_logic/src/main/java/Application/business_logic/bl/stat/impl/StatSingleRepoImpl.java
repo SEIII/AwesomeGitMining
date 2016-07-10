@@ -165,6 +165,7 @@ public class StatSingleRepoImpl implements StatSingleRepoService{
 		// TODO Auto-generated method stub
 		Cache cache = cacheManager.getCache("getRepoContributors");
 
+
         if(cache==null) {
             return false;
         }

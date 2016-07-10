@@ -1,6 +1,5 @@
 package Application.data.data_impl.git;
 
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -20,10 +19,11 @@ import org.springframework.stereotype.Component;
 import Application.AppContextSupport;
 import Application.common.DynamicInfo;
 import Application.common.DTO.WatchUserInfo;
+import Application.common.data_service.GitEventInfoService;
 import Application.data.DAO.sql.SQLTemplate;
 
 @Component
-public class GitEventInfoImpl {
+public class GitEventInfoImpl implements GitEventInfoService {
 
 	@Autowired
 	SQLTemplate template;

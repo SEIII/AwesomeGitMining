@@ -131,11 +131,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar Menu -->
 				<ul class="sidebar-menu">
 						
-						<li class="active"><a a href="userDetail?login=$user.gitid"><i class="fa fa-github-alt"></i> <span>Detail</span></a></li>
+						<li><a a href="userDetail?login=$user.gitid"><i class="fa fa-github-alt"></i> <span>Detail</span></a></li>
 						<li><a href="/followCollection?account=$user.account"><i class="fa fa-star-o"></i> <span>Collection</span></a></li>
 						<li><a href="/watch?account=$user.account"><i class="fa fa-eye"></i> <span>Watch</span></a></li>
 						<li><a href="/home"><i class="fa fa-search"></i> <span>Search</span></a></li>
-                        <li><a href="/dynamic?account=$user.account"><i class="fa fa-bullhorn"></i> <span>Dynamic</span></a></li>
+                        <li class="active"><a href="#"><i class="fa fa-bullhorn"></i> <span>Dynamic</span></a></li>
 
 						<li class="treeview">
 							<a href="#"><i class="fa fa-bar-chart"></i> <span>Statistics</span> <i class="fa fa-angle-left pull-right"></i></a>
@@ -158,72 +158,106 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <section class="content-header">
                 <h1>
-            Please Wait for a while
-            <small>we are trying !</small>
+            Dynamics about users you watched
+            <small>about their actions on github</small>
           </h1>
                 <ol class="breadcrumb">
                     <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
                 </ol>
             </section>
 
-            
+                    <!-- Main content -->
+        <section class="content">
+          <!-- row -->
+          <div class="row">
+            <div class="col-md-12">
+              <!-- The time line -->
+              <ul class="timeline">
+                <!-- timeline time label -->
+                  
+                #foreach($item in $result)  
+                  
+                  #if((($result.indexOf($item))%3)==0)
+                    <li class="time-label">
+                    <span class="bg-red">
+                        $item.dateString
+                    </span>
+                    </li>
+                  #elseif((($result.indexOf($item))%3)==1)
+                    <li class="time-label">
+                    <span class="bg-green">
+                        $item.dateString
+                    </span>
+                    </li>
+                  #elseif((($result.indexOf($item))%3)==2)
+                    <li class="time-label">
+                    <span class="bg-yellow">
+                        $item.dateString
+                    </span>
+                    </li>
+                  #end
+                  
+                
+                <!-- /.timeline-label -->
+                
+                #foreach($i in $item.dynamics)
+                <li>
+                  #if((($item.dynamics.indexOf($i))%3)==0)
+                    <i class="fa fa-envelope bg-blue"></i>
+                  #elseif((($item.dynamics.indexOf($i))%3)==1) 
+                    <i class="fa fa-user bg-aqua"></i>
+                  #elseif((($item.dynamics.indexOf($i))%3)==2)
+                    <i class="fa fa-comments bg-yellow"></i>
+                  #end
+                  
+                  <div class="timeline-item">
 
-            <div class="row">
-                <div class="col-md-1 column"></div>
-
-                <div class="col-md-10 column">
-                    
-                    <div id="upBlock" class="row clearfix"></div>
-                    
-                    <script type="text/javascript">
-                        var h1 = window.innerHeight * 0.12;
-
-                        $("#upBlock").height(h1);
-                    </script>
-
-
-                    <script type="text/javascript">
-                        $(window).resize(function () {
-
-                            var h1 = window.innerHeight * 0.12;
-
-                            $("#upBlock").height(h1);
-
-                        });
-                    </script>
-
-
-                    <div class="row clearfix">
-                    
-<!--                        <div class="col-md-3 column"></div>-->
-                    <div class="col-md-12 column">
-                       <center><img src="/img/load.gif" width="1000px" height="600px"></center> 
-                                   
-                        </div>
-                    
-                    
-                    
+                                    <!-- Box Comment -->
+              <div class="box box-widget">
+                <div class='box-header with-border'>
+                  <div class='user-block'>
+                    <img class='img-circle' src='$i.avatar_url' alt='user image'>
+                    <span class='username'><a href="#">$i.login</a></span>
+                    <span class='description'>Shared publicly - $i.dateString</span>
+                  </div><!-- /.user-block -->
+                  <div class='box-tools'>
+                    <button class='btn btn-box-tool' data-toggle='tooltip' title='Mark as read'><i class='fa fa-circle-o'></i></button>
+                    <button class='btn btn-box-tool' data-widget='collapse'><i class='fa fa-minus'></i></button>
+                    <button class='btn btn-box-tool' data-widget='remove'><i class='fa fa-times'></i></button>
+                  </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+                <div class='box-body'>
+                  $i.content
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                  <form action="#" method="post">
+                    <img class="img-responsive img-circle img-sm" src="$user.avatar_url" alt="alt text">
+                    <!-- .img-push is used to add margin to elements next to floating images -->
+                    <div class="img-push">
+                      <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
                     </div>
+                  </form>
+                </div><!-- /.box-footer -->
+              </div><!-- /.box -->
+                  </div>
+                </li>
+                #end
+                <!-- timeline item -->
+                #end
+                <!-- END timeline item -->
+                
+                
+                <!-- END timeline item -->
+                <li>
+                  <i class="fa fa-clock-o bg-gray"></i>
+                </li>
+              </ul>
+            </div><!-- /.col -->
+    
+            </div><!-- /.row -->
+        </section><!-- /.content -->
 
-                    <script>
-                        $.getJSON("/contributors?owner=$repoinfo.getOwnerName()&repoName=$repoinfo.getReposName()",
-                         function(data){
-                    window.location = "/repoDetail?owner=$repoinfo.getOwnerName()&repoName=$repoinfo.getReposName()"
-                })
-                    </script>
-
-
-                    <br>
-                    
-
-                   
-
-
-                </div>
-
-                <div class="col-md-1 column"></div>
-
-            </div>
+            
 
 
 
