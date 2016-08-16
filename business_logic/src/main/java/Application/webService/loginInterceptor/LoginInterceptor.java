@@ -14,12 +14,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
 
+        if(request.getRequestURI().equals("/homepic")){
+        	return true;
+        }
+
         if(request.getRequestURI().equals("/")) {
             response.sendRedirect("/landing");
         }else {
             response.sendRedirect("/login");
         }
-
 
         return false;
     }

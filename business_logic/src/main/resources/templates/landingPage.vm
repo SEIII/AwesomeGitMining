@@ -39,6 +39,7 @@
 						<li><a href="#section-works" style="font-family:Microsoft YaHei;font-size:18px">实 例</a></li>
                         <li><a href="#section-about" style="font-family:Microsoft YaHei;font-size:18px">团 队</a></li>
                         <li><a href="#section-money" style="font-family:Microsoft YaHei;font-size:18px">打 赏</a></li>
+                        <li><a href="https://github.com/SEIII/AwesomeGitMining" style="font-family:Microsoft YaHei;font-size:18px"><i class="fa fa-github"></i> Git</a></li>
 						<li><a href="/login" style="font-family:Microsoft YaHei;font-size:18px">登 录</a></li>
                         
 					</ul>

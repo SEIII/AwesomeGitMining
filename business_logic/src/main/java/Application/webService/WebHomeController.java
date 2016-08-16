@@ -15,10 +15,15 @@ public class WebHomeController {
     public String home(@ModelAttribute("user") GitMiningUserInfo userInfo) {
         return "landingPage";
     }
-    
+
     @RequestMapping("/home")
     public String testHome(){
         return "homePage";
     }
-    
+
+    @RequestMapping("/homepic")
+    public String homepic(){
+    	return "homePic";
+    }
+
 }
